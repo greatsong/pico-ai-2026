@@ -1,0 +1,2722 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter_01/">
+      
+      
+        <link rel="next" href="../chapter_03/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습 - 2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rgb-led-stick" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" class="md-header__button md-logo" aria-label="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../chapter_01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  센서로 세상 읽기 – MQ2 가스 센서와 아날로그 입력 탐구
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../chapter_03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" class="md-nav__button md-logo" aria-label="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter_01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    센서로 세상 읽기 – MQ2 가스 센서와 아날로그 입력 탐구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗺️ 전체 흐름에서 오늘의 위치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗺️ 전체 흐름에서 오늘의 위치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rgb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 핵심 개념 1: RGB 색상 모델
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-neopixel-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 핵심 개념 2: NeoPixel LED 제어
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎭 창작 활동: 나만의 빛 작품
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎭 창작 활동: 나만의 빛 작품">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-3-rgb-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 도입 – 빛의 3원색과 RGB 모델 (5분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-led-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 – LED 기초 제어 (15분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 – 애니메이션 창작 (20분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 – 작품 감상과 성찰 (10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-3-rgb-0005" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 빛의 3원색과 RGB 색상 모델 (00~05분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1단계: 빛의 3원색과 RGB 색상 모델 (00~05분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        물감 vs 빛 — 섞으면 정반대!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r-g-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (R, G, B) 튜플이란?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-1-led-0520" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 – LED 기초 제어 (05~20분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2단계: 실습 1 – LED 기초 제어 (05~20분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neopixel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NeoPixel이란?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        회로 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-led-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: 전체 LED 한 색으로 켜기 (v1 — 가장 기본)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 에러 경험: write()를 빼먹으면?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: 색상 퍼레이드 (v2 — 기능 추가)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: 개별 LED 제어 + 나만의 색 탐색
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-2-2040" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 – 애니메이션 창작 (20~40분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 실습 2 – 애니메이션 창작 (20~40분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wheel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wheel 함수 — 숫자 하나로 무지개 전체를!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-v1-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: 무지개 흐르기 (v1 → v2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: 나만의 패턴 만들기 — 자유 창작 시간! 🎨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 창작 미션 — 3단계 차등!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 기본 미션
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐⭐ 도전 미션
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐⭐⭐ 고수 미션
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        연습 문제
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-4050" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 – 작품 감상과 성찰 (40~50분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계: 정리 – 작품 감상과 성찰 (40~50분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4045" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎭 작품 발표 시간 (40~45분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UX 설계 사고 — 빛으로 '정보'를 전달하려면?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔮 다음 시간 예고
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 교과 연결 &amp; 진로 탐색
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 교과 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌟 관련 진로
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        형성 평가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 수업 자료 모음
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter_03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗺️ 전체 흐름에서 오늘의 위치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗺️ 전체 흐름에서 오늘의 위치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rgb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 핵심 개념 1: RGB 색상 모델
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-neopixel-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💡 핵심 개념 2: NeoPixel LED 제어
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎭 창작 활동: 나만의 빛 작품
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎭 창작 활동: 나만의 빛 작품">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-3-rgb-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 도입 – 빛의 3원색과 RGB 모델 (5분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-led-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 – LED 기초 제어 (15분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 – 애니메이션 창작 (20분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 – 작품 감상과 성찰 (10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-3-rgb-0005" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 빛의 3원색과 RGB 색상 모델 (00~05분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1단계: 빛의 3원색과 RGB 색상 모델 (00~05분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        물감 vs 빛 — 섞으면 정반대!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r-g-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (R, G, B) 튜플이란?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-1-led-0520" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 – LED 기초 제어 (05~20분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2단계: 실습 1 – LED 기초 제어 (05~20분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neopixel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NeoPixel이란?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        회로 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-led-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: 전체 LED 한 색으로 켜기 (v1 — 가장 기본)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 에러 경험: write()를 빼먹으면?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: 색상 퍼레이드 (v2 — 기능 추가)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: 개별 LED 제어 + 나만의 색 탐색
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-2-2040" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 – 애니메이션 창작 (20~40분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 실습 2 – 애니메이션 창작 (20~40분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wheel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wheel 함수 — 숫자 하나로 무지개 전체를!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-v1-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: 무지개 흐르기 (v1 → v2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: 나만의 패턴 만들기 — 자유 창작 시간! 🎨
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 창작 미션 — 3단계 차등!
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 기본 미션
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐⭐ 도전 미션
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐⭐⭐ 고수 미션
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        연습 문제
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-4050" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 – 작품 감상과 성찰 (40~50분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계: 정리 – 작품 감상과 성찰 (40~50분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4045" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎭 작품 발표 시간 (40~45분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UX 설계 사고 — 빛으로 '정보'를 전달하려면?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔮 다음 시간 예고
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 교과 연결 &amp; 진로 탐색
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎓 교과 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌟 관련 진로
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        형성 평가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 수업 자료 모음
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="rgb-led-stick">빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습<a class="headerlink" href="#rgb-led-stick" title="Permanent link">&para;</a></h1>
+<div class="lesson-banner">
+<p><strong>50분</strong> | RGB 색상 모델 | NeoPixel LED 제어 | <strong>난이도</strong> ★★☆</p>
+<p><strong>학습목표</strong>: RGB 색상 모델을 이해하고 (R,G,B) 튜플로 원하는 색을 표현할 수 있다 · NeoPixel 라이브러리로 LED를 개별/전체 제어할 수 있다 · 반복문과 함수를 활용하여 나만의 LED 애니메이션을 창작할 수 있다</p>
+<blockquote>
+<p><strong>오늘의 질문</strong>: "숫자 세 개만으로 어떻게 1600만 가지 색을 만들 수 있을까?"</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="_1">🗺️ 전체 흐름에서 오늘의 위치<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>지난 시간에 MQ2 센서로 <strong>세상을 읽는 법(입력)</strong>을 배웠습니다. 오늘은 정반대 방향입니다. Pico가 <strong>세상에 말하는 법(출력)</strong>을 배울 차례입니다!</p>
+<div class="mermaid">flowchart LR
+    A["1차시&lt;br/&gt;🔍 입력&lt;br/&gt;MQ2 센서로&lt;br/&gt;세상 읽기"] --&gt; B["2차시&lt;br/&gt;💡 출력&lt;br/&gt;RGB LED로&lt;br/&gt;빛 표현하기"]
+    B --&gt; C["3차시&lt;br/&gt;🔗 통합&lt;br/&gt;센서+LED&lt;br/&gt;검출 시스템"]
+
+    style A fill:#e0e0e0,stroke:#999,color:#666
+    style B fill:#ff9800,stroke:#e65100,color:#fff,stroke-width:3px
+    style C fill:#e0e0e0,stroke:#999,color:#666</div>
+<blockquote>
+<p>💡 <strong>입력(센서)과 출력(LED)은 동전의 양면입니다.</strong> 오늘 배운 출력 기술은 3차시에서 센서와 결합되어 완전한 시스템이 됩니다.</p>
+</blockquote>
+<hr />
+<div class="cards-grid">
+<div class="card card-orange">
+<h3 id="1-rgb">🎨 핵심 개념 1: RGB 색상 모델<a class="headerlink" href="#1-rgb" title="Permanent link">&para;</a></h3>
+<p>빛의 3원색(빨강·초록·파랑)을 섞어 모든 색을 만드는 원리를 이해하고, (R, G, B) 튜플로 색상을 정확히 표현합니다.</p>
+</div>
+<div class="card card-blue">
+<h3 id="2-neopixel-led">💡 핵심 개념 2: NeoPixel LED 제어<a class="headerlink" href="#2-neopixel-led" title="Permanent link">&para;</a></h3>
+<p>LED 10개를 개별 주소로 제어하는 방법을 익히고, 반복문과 함수를 활용해 다양한 빛 애니메이션을 만듭니다.</p>
+</div>
+<div class="card card-green">
+<h3 id="_2">🎭 창작 활동: 나만의 빛 작품<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>숨쉬기·나이트라이더·경광등 패턴 뼈대를 수정하고 조합하여, 자기만의 LED 조명 작품을 설계합니다.</p>
+</div>
+</div>
+<hr />
+<div class="steps">
+<div class="step">
+<h4 id="1-3-rgb-5">1단계: 도입 – 빛의 3원색과 RGB 모델 (5분)<a class="headerlink" href="#1-3-rgb-5" title="Permanent link">&para;</a></h4>
+<p>물감 혼합과 빛 혼합의 차이를 비유로 이해하고, (R,G,B) 튜플의 구조를 파악합니다.</p>
+</div>
+<div class="step">
+<h4 id="2-1-led-15">2단계: 실습 1 – LED 기초 제어 (15분)<a class="headerlink" href="#2-1-led-15" title="Permanent link">&para;</a></h4>
+<p>회로를 연결하고, 전체 LED 색상 변경 → 개별 LED 제어 → 나만의 색 탐색을 단계적으로 실습합니다.</p>
+</div>
+<div class="step">
+<h4 id="3-2-20">3단계: 실습 2 – 애니메이션 창작 (20분)<a class="headerlink" href="#3-2-20" title="Permanent link">&para;</a></h4>
+<p>무지개 흐르기 애니메이션을 구현한 뒤, 다양한 패턴 뼈대를 자유롭게 수정하며 나만의 작품을 만듭니다.</p>
+</div>
+<div class="step">
+<h4 id="4-10">4단계: 정리 – 작품 감상과 성찰 (10분)<a class="headerlink" href="#4-10" title="Permanent link">&para;</a></h4>
+<p>교실 조명을 끄고 작품을 발표하며, '같은 하드웨어·다른 소프트웨어'의 의미를 되새깁니다.</p>
+</div>
+</div>
+<hr />
+<h2 id="1-3-rgb-0005">1단계: 빛의 3원색과 RGB 색상 모델 (00~05분)<a class="headerlink" href="#1-3-rgb-0005" title="Permanent link">&para;</a></h2>
+<h3 id="vs">물감 vs 빛 — 섞으면 정반대!<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<p>여러분, 미술 시간에 물감을 섞어본 적 있죠? 빨강 + 파랑 = 보라, 모든 색을 다 섞으면 거의 <strong>검정</strong>에 가까워집니다. 그런데 <strong>빛</strong>은 정반대입니다!</p>
+<div class="mermaid">flowchart LR
+    subgraph 물감["🖌️ 물감 혼합 (감산 혼합)"]
+        P1["빨강 물감"] --- PM["섞으면"]
+        P2["파랑 물감"] --- PM
+        P3["초록 물감"] --- PM
+        PM --&gt; PResult["⬛ 검정에 가까움"]
+    end
+
+    subgraph 빛["💡 빛 혼합 (가산 혼합)"]
+        L1["🔴 빨간 빛"] --- LM["섞으면"]
+        L2["🔵 파란 빛"] --- LM
+        L3["🟢 초록 빛"] --- LM
+        LM --&gt; LResult["⬜ 흰색!"]
+    end
+
+    style PResult fill:#333,color:#fff
+    style LResult fill:#fff,stroke:#333,color:#333</div>
+<table>
+<thead>
+<tr>
+<th>비교 항목</th>
+<th>물감 (감산 혼합)</th>
+<th>빛 (가산 혼합)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3원색</td>
+<td>빨강, 노랑, 파랑</td>
+<td><strong>빨강(R), 초록(G), 파랑(B)</strong></td>
+</tr>
+<tr>
+<td>모두 섞으면</td>
+<td>검정(어두워짐)</td>
+<td><strong>흰색(밝아짐)</strong></td>
+</tr>
+<tr>
+<td>아무것도 없으면</td>
+<td>흰색(종이색)</td>
+<td>검정(어둠)</td>
+</tr>
+<tr>
+<td>사용처</td>
+<td>그림, 인쇄</td>
+<td><strong>모니터, LED, 스마트폰</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔑 <strong>핵심 포인트</strong>: 컴퓨터 화면, 스마트폰, 그리고 오늘 사용할 RGB LED는 모두 <strong>빛의 가산 혼합</strong> 방식입니다. 빨강(Red) + 초록(Green) + 파랑(Blue) = 흰색!</p>
+</blockquote>
+<h3 id="r-g-b">(R, G, B) 튜플이란?<a class="headerlink" href="#r-g-b" title="Permanent link">&para;</a></h3>
+<p>RGB LED의 색상은 <strong>숫자 세 개의 묶음</strong>으로 표현합니다. 파이썬에서는 이 묶음을 <strong>튜플(tuple)</strong>이라고 부릅니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>(R, G, B) = (빨강 밝기, 초록 밝기, 파랑 밝기)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>각 값의 범위: 0(꺼짐) ~ 255(최대 밝기)
+</span></code></pre></div>
+<p><strong>왜 0~255일까?</strong> 각 색상 채널이 <strong>8비트</strong>(2⁸ = 256단계)로 표현되기 때문입니다. 세 채널을 합치면 총 <strong>24비트</strong>, 즉 256 × 256 × 256 = <strong>16,777,216가지</strong> 색을 만들 수 있습니다. 약 <strong>1600만 색</strong>이죠!</p>
+<table>
+<thead>
+<tr>
+<th>RGB 값</th>
+<th>결과 색상</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(255, 0, 0)</code></td>
+<td>🔴 빨강</td>
+<td>R만 최대</td>
+</tr>
+<tr>
+<td><code>(0, 255, 0)</code></td>
+<td>🟢 초록</td>
+<td>G만 최대</td>
+</tr>
+<tr>
+<td><code>(0, 0, 255)</code></td>
+<td>🔵 파랑</td>
+<td>B만 최대</td>
+</tr>
+<tr>
+<td><code>(255, 255, 0)</code></td>
+<td>🟡 노랑</td>
+<td>R + G</td>
+</tr>
+<tr>
+<td><code>(255, 0, 255)</code></td>
+<td>🟣 보라</td>
+<td>R + B</td>
+</tr>
+<tr>
+<td><code>(0, 255, 255)</code></td>
+<td>🩵 청록</td>
+<td>G + B</td>
+</tr>
+<tr>
+<td><code>(255, 255, 255)</code></td>
+<td>⬜ 흰색</td>
+<td>모두 최대</td>
+</tr>
+<tr>
+<td><code>(0, 0, 0)</code></td>
+<td>⬛ 꺼짐</td>
+<td>모두 0</td>
+</tr>
+<tr>
+<td><code>(255, 165, 0)</code></td>
+<td>🟠 주황</td>
+<td>R 최대 + G 중간</td>
+</tr>
+<tr>
+<td><code>(128, 0, 0)</code></td>
+<td>🟤 어두운 빨강</td>
+<td>R 절반</td>
+</tr>
+</tbody>
+</table>
+<!-- IMAGE: A colorful educational diagram showing RGB color mixing with three overlapping circles (red, green, blue) on a dark background. Where circles overlap: R+G=Yellow, G+B=Cyan, R+B=Magenta, center=White. Clean flat illustration style with labels showing (R,G,B) tuple values for each color region. -->
+
+<blockquote>
+<p>💡 <strong>밝기 조절 팁</strong>: 같은 색이라도 숫자를 줄이면 어두워집니다. <code>(255, 0, 0)</code>은 밝은 빨강, <code>(50, 0, 0)</code>은 어두운 빨강. <strong>비율은 유지하면서 전체 값만 줄이세요!</strong></p>
+<p><strong>자기점검 퀴즈</strong></p>
+<p><strong>Q1.</strong> 빨간 빛과 초록 빛을 동시에 최대 밝기로 섞으면 무슨 색이 나올까요?</p>
+<p>① 보라 ② 주황 ③ 노랑 ④ 흰색</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ③ 노랑</strong></p>
+<p><strong>해설</strong>: (255, 255, 0) = 빨강 + 초록 = 노랑입니다. 물감에서는 빨강+초록=갈색이지만, 빛에서는 노랑이 됩니다! 보라는 R+B, 흰색은 R+G+B 모두 섞어야 합니다. 잘 맞혔다면 가산 혼합 개념을 잘 이해한 거예요! 👏</p>
+</details>
+<p><strong>Q2.</strong> (100, 0, 50)은 어떤 색에 가까울까요?</p>
+<p>① 밝은 하늘색 ② 어두운 분홍/자주 ③ 연두색 ④ 밝은 노랑</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ② 어두운 분홍/자주</strong></p>
+<p><strong>해설</strong>: R=100(중간), G=0(없음), B=50(약간)이므로 빨강 계열에 파랑이 살짝 섞인 어두운 분홍/자주색입니다. G가 0이므로 초록 계열 색은 나올 수 없습니다. 틀렸다면 위의 RGB 색상 표를 다시 살펴보세요!</p>
+</details>
+</blockquote>
+<hr />
+<h2 id="2-1-led-0520">2단계: 실습 1 – LED 기초 제어 (05~20분)<a class="headerlink" href="#2-1-led-0520" title="Permanent link">&para;</a></h2>
+<h3 id="neopixel">NeoPixel이란?<a class="headerlink" href="#neopixel" title="Permanent link">&para;</a></h3>
+<p>RGB LED Stick에는 <strong>WS2813</strong> 칩이 내장된 LED 10개가 일렬로 배치되어 있습니다. 이 LED들은 <strong>NeoPixel 프로토콜</strong>이라는 방식으로 통신합니다.</p>
+<div class="mermaid">sequenceDiagram
+    participant Pico as Pico (GP16)
+    participant LED0 as LED #0
+    participant LED1 as LED #1
+    participant LED9 as LED #9
+
+    Note over Pico: np.write() 호출!
+    Pico-&gt;&gt;LED0: LED#0 색상 데이터&lt;br/&gt;(R, G, B)
+    LED0-&gt;&gt;LED1: LED#1 색상 데이터&lt;br/&gt;(R, G, B)
+    LED1--&gt;&gt;LED9: ... 순서대로 전달 ...
+    Note over LED0,LED9: 모든 LED가&lt;br/&gt;동시에 점등!</div>
+<table>
+<thead>
+<tr>
+<th>NeoPixel 특징</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>데이터 선 1개</td>
+<td>GP16 핀 하나로 10개 LED를 모두 제어</td>
+</tr>
+<tr>
+<td>개별 주소 지정</td>
+<td><code>np[0]</code>, <code>np[1]</code>, ..., <code>np[9]</code>로 각각 다른 색 가능</td>
+</tr>
+<tr>
+<td>직렬 전송</td>
+<td>데이터가 LED0 → LED1 → ... → LED9 순서로 전달됨</td>
+</tr>
+<tr>
+<td>write() 필수</td>
+<td>색상을 넣은 후 <code>np.write()</code>를 호출해야 실제 LED에 반영</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">회로 연결<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Grove LED Stick을 Shield의 <strong>D16 포트</strong>에 꽂으세요. 연결은 이게 전부입니다!</p>
+<table>
+<thead>
+<tr>
+<th>Grove Shield 포트</th>
+<th>Pico 핀</th>
+<th>연결 대상</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D16</td>
+<td>GP16</td>
+<td>RGB LED Stick (IN 쪽)</td>
+<td>NeoPixel 데이터 전송</td>
+</tr>
+<tr>
+<td>VCC (3.3V)</td>
+<td>-</td>
+<td>LED 전원</td>
+<td>자동 연결</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>-</td>
+<td>LED 접지</td>
+<td>자동 연결</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">flowchart LR
+    subgraph Shield["Grove Shield (Pico 장착)"]
+        D16["D16 포트"]
+    end
+
+    subgraph LED["RGB LED Stick"]
+        IN["IN 쪽&lt;br/&gt;⚠️ 이쪽을 연결!"]
+        L0["LED 0"]
+        L1["LED 1"]
+        L9["LED 9"]
+        OUT["OUT 쪽"]
+        IN --&gt; L0 --&gt; L1 --&gt; L9 --&gt; OUT
+    end
+
+    D16 --&gt;|"Grove 케이블"| IN
+
+    style IN fill:#ff5722,color:#fff,stroke-width:2px
+    style OUT fill:#9e9e9e,color:#fff</div>
+<blockquote>
+<p>⚠️ <strong>주의!</strong> LED Stick에는 <strong>IN</strong>(입력)과 <strong>OUT</strong>(출력) 방향이 있습니다. <strong>IN 쪽이 Grove Shield에 연결</strong>되어야 합니다. 거꾸로 꽂으면 LED가 동작하지 않습니다. 표시가 작으니 잘 확인하세요!</p>
+</blockquote>
+<h3 id="step-1-led-v1">Step 1: 전체 LED 한 색으로 켜기 (v1 — 가장 기본)<a class="headerlink" href="#step-1-led-v1" title="Permanent link">&para;</a></h3>
+<p>먼저 가장 간단한 코드부터 시작합니다. LED 10개를 <strong>한 가지 색</strong>으로 켜 봅시다.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># === step1_v1: 가장 기본 - LED 전체 빨간색 켜기 ===</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># LED 설정: GP16 핀, LED 10개</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 10개 LED를 모두 빨간색으로 설정</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># &lt;- (R, G, B) 튜플로 색 지정</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># 반드시 write()를 호출해야 LED에 반영!</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>  <span class="c1"># &lt;- 이걸 빼먹으면 아무 일도 안 일어남</span>
+</span></code></pre></div>
+<p><strong>예상 결과</strong>: LED 10개가 모두 밝은 빨간색으로 켜집니다.</p>
+<p>위 코드의 핵심은 두 줄입니다:
+- <strong>3번째 줄</strong> <code>np = NeoPixel(Pin(16), 10)</code> — GP16 핀에 연결된 LED 10개를 제어할 객체 생성
+- <strong>7번째 줄</strong> <code>np[i] = (255, 0, 0)</code> — i번째 LED에 RGB 색상을 지정 (리스트 인덱싱과 같은 문법!)
+- <strong>10번째 줄</strong> <code>np.write()</code> — 설정한 색상을 실제 LED에 전송 (이게 바로 <strong>NeoPixel 데이터 전송</strong>)</p>
+<h3 id="write">🐛 에러 경험: write()를 빼먹으면?<a class="headerlink" href="#write" title="Permanent link">&para;</a></h3>
+<p>아래 코드를 실행하면 어떻게 될까요?</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># ❌ 의도적으로 잘못된 코드 — 실행해보세요!</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># 초록색 설정</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># np.write()  ← 이 줄이 빠져있음!</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;코드 실행 완료!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<details><summary>결과 확인</summary>
+
+**결과**: 셸에 "코드 실행 완료!"는 출력되지만, **LED는 아무 변화 없음**!
+
+**원인**: `np[i] = (0, 255, 0)`은 Pico 내부의 메모리에 색상 정보를 저장할 뿐, 실제 LED로 데이터를 보내지 않습니다. `np.write()`가 호출되어야 비로소 저장된 데이터가 LED Stick으로 전송됩니다.
+
+**기억하세요**: 색 넣기 → **반드시 `np.write()`** → LED 반영!
+
+</details>
+
+<h3 id="step-1-v2">Step 1: 색상 퍼레이드 (v2 — 기능 추가)<a class="headerlink" href="#step-1-v2" title="Permanent link">&para;</a></h3>
+<p>이전 코드에서 <strong>fill 함수</strong>와 <strong>색상 사전</strong>을 추가하여, 여러 색이 순서대로 바뀌는 코드로 업그레이드합니다.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># === step1_v2: 색상 퍼레이드 ===</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 이전 코드에서 달라진 점: fill() 함수 + 여러 색 순환 + time 모듈 추가</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>  <span class="c1"># &lt;- 추가! 시간 지연용</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># --- 색상 사전: 자주 쓰는 색을 이름으로 저장 ---</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">RED</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">GREEN</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">BLUE</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">YELLOW</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">PURPLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="n">CYAN</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="n">WHITE</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="n">OFF</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="c1"># --- 전체 LED를 한 색으로 채우는 함수 ---</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;LED 전체를 같은 색으로 설정하고 적용&quot;&quot;&quot;</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>  <span class="c1"># &lt;- fill 안에 write()를 포함시켜서 실수 방지!</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="c1"># --- 색상 퍼레이드 실행 ---</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">RED</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">,</span> <span class="n">YELLOW</span><span class="p">,</span> <span class="n">PURPLE</span><span class="p">,</span> <span class="n">CYAN</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">]</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="n">names</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;빨강&quot;</span><span class="p">,</span> <span class="s2">&quot;초록&quot;</span><span class="p">,</span> <span class="s2">&quot;파랑&quot;</span><span class="p">,</span> <span class="s2">&quot;노랑&quot;</span><span class="p">,</span> <span class="s2">&quot;보라&quot;</span><span class="p">,</span> <span class="s2">&quot;청록&quot;</span><span class="p">,</span> <span class="s2">&quot;흰색&quot;</span><span class="p">]</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="n">fill</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> 점등!&quot;</span><span class="p">)</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># &lt;- 1초 대기 후 다음 색으로</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="n">fill</span><span class="p">(</span><span class="n">OFF</span><span class="p">)</span>  <span class="c1"># 모든 LED 끄기</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;끝!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>예상 출력 (셸)</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>빨강 점등!
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>초록 점등!
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>파랑 점등!
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>노랑 점등!
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>보라 점등!
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>청록 점등!
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>흰색 점등!
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>끝!
+</span></code></pre></div></p>
+<p><strong>v1에서 v2로 바뀐 점</strong>:
+1. <code>fill()</code> 함수 추가 → 매번 for문 + write()를 반복할 필요 없이 한 줄로 색상 변경
+2. 색상 사전(<code>RED</code>, <code>GREEN</code> 등) → <code>(255, 0, 0)</code> 외우지 않아도 이름으로 사용
+3. <code>time.sleep(1)</code> → 색 변화를 눈으로 확인할 수 있는 1초 간격</p>
+<h3 id="step-2-led">Step 2: 개별 LED 제어 + 나만의 색 탐색<a class="headerlink" href="#step-2-led" title="Permanent link">&para;</a></h3>
+<p>이제 LED를 <strong>하나하나 다른 색</strong>으로 켜 봅시다. NeoPixel의 진짜 힘은 여기에 있습니다!</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># === step2: 개별 LED 제어 + 색상 실험 ===</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># --- 파트 1: 파란 불빛이 하나씩 이동하는 효과 ---</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;파트 1: 불빛 이동!&quot;</span><span class="p">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="c1"># 먼저 전체 끄기</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="n">np</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="c1"># i번째 LED만 파란색으로 켜기</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>  <span class="c1"># &lt;- np[인덱스]로 개별 LED 지정</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># --- 파트 2: 빨강→보라 그라데이션 ---</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;파트 2: 그라데이션!&quot;</span><span class="p">)</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>    <span class="n">r</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">25</span><span class="p">)</span>  <span class="c1"># 빨강: 255 → 30 (점점 감소)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">25</span>           <span class="c1"># 파랑: 0 → 225 (점점 증가)</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>   <span class="c1"># 초록은 0으로 고정</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="c1"># --- 파트 3: 나만의 색 만들기! ---</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;파트 3: 나만의 색!&quot;</span><span class="p">)</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="n">my_r</span> <span class="o">=</span> <span class="mi">255</span>   <span class="c1"># ← 이 숫자를 바꿔보세요! (0~255)</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="n">my_g</span> <span class="o">=</span> <span class="mi">100</span>   <span class="c1"># ← 이 숫자를 바꿔보세요! (0~255)</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="n">my_b</span> <span class="o">=</span> <span class="mi">50</span>    <span class="c1"># ← 이 숫자를 바꿔보세요! (0~255)</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_r</span><span class="p">,</span> <span class="n">my_g</span><span class="p">,</span> <span class="n">my_b</span><span class="p">)</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;내 색: (</span><span class="si">{</span><span class="n">my_r</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">my_g</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">my_b</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>예상 출력</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>파트 1: 불빛 이동!
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>파트 2: 그라데이션!
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>파트 3: 나만의 색!
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>내 색: (255, 100, 50)
+</span></code></pre></div></p>
+<p>파트 2의 그라데이션을 표로 살펴보면:</p>
+<table>
+<thead>
+<tr>
+<th>LED 번호</th>
+<th>R 값</th>
+<th>G 값</th>
+<th>B 값</th>
+<th>결과 색상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>255</td>
+<td>0</td>
+<td>0</td>
+<td>빨강</td>
+</tr>
+<tr>
+<td>1</td>
+<td>230</td>
+<td>0</td>
+<td>25</td>
+<td>빨강+파랑 약간</td>
+</tr>
+<tr>
+<td>2</td>
+<td>205</td>
+<td>0</td>
+<td>50</td>
+<td>분홍 계열</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>0</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>9</td>
+<td>30</td>
+<td>0</td>
+<td>225</td>
+<td>거의 파랑</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎨 <strong>도전!</strong> <code>my_r</code>, <code>my_g</code>, <code>my_b</code> 값을 자유롭게 바꿔서 <strong>자기만의 색</strong>을 찾아보세요!
+- 하늘색: <code>(100, 200, 255)</code> / 핑크: <code>(255, 100, 150)</code> / 라임: <code>(180, 255, 0)</code>
+- 인터넷에서 <strong>"RGB color picker"</strong>를 검색하면 원하는 색의 정확한 값을 찾을 수 있어요!</p>
+</blockquote>
+<!-- IMAGE: A screenshot-style illustration showing an RGB color picker tool with three sliders (R, G, B) each ranging from 0-255, a large color preview square showing the resulting color, and the tuple notation (R, G, B) displayed below. Clean UI design style with warm colors. -->
+
+<blockquote>
+<p><strong>자기점검 퀴즈</strong></p>
+<p><strong>Q1.</strong> 다음 코드를 실행하면 LED Stick은 어떻게 보일까요?
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">np</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span></code></pre></div></p>
+<p>① 10개 모두 노란색 ② 6번째 LED만 노란색, 나머지 꺼짐 ③ 5개는 노란색, 5개는 꺼짐 ④ 아무 일도 안 일어남</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ② 6번째 LED만 노란색, 나머지 꺼짐</strong></p>
+<p><strong>해설</strong>: <code>np[5]</code>는 인덱스 5, 즉 <strong>6번째</strong> LED입니다 (0부터 세니까요!). 나머지는 <code>(0,0,0)</code>으로 꺼져 있고, <code>(255,255,0)</code>은 R+G = 노란색입니다. <code>np.write()</code>가 있으므로 정상 반영됩니다. 인덱스가 0부터 시작한다는 점을 잊지 마세요!</p>
+</details>
+<p><strong>Q2.</strong> <code>(255, 0, 0)</code>의 절반 밝기 빨강을 만들려면 어떻게 해야 할까요?</p>
+<p>① <code>(128, 0, 0)</code> ② <code>(255, 128, 128)</code> ③ <code>(128, 128, 128)</code> ④ <code>(255, 0, 0, 128)</code></p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ① (128, 0, 0)</strong></p>
+<p><strong>해설</strong>: 밝기를 줄이려면 <strong>비율은 유지하면서 모든 값을 같은 비율로 줄입니다</strong>. R만 있는 빨강이므로 R만 반으로 줄이면 됩니다. ②는 분홍색, ③은 회색, ④는 튜플 원소가 4개라 오류가 납니다.</p>
+</details>
+</blockquote>
+<hr />
+<h2 id="3-2-2040">3단계: 실습 2 – 애니메이션 창작 (20~40분)<a class="headerlink" href="#3-2-2040" title="Permanent link">&para;</a></h2>
+<h3 id="wheel">wheel 함수 — 숫자 하나로 무지개 전체를!<a class="headerlink" href="#wheel" title="Permanent link">&para;</a></h3>
+<p>무지개를 만들려면 RGB 값을 부드럽게 변환해야 합니다. 이때 사용하는 것이 <strong>wheel 함수</strong>입니다. 0~255 사이의 숫자 <strong>하나</strong>를 넣으면 무지개 위의 해당 위치 색상이 (R,G,B)로 나옵니다.</p>
+<div class="mermaid">flowchart LR
+    subgraph W["wheel(pos) 함수의 원리"]
+        direction LR
+        A["0~84&lt;br/&gt;🔴→🟢&lt;br/&gt;R 감소, G 증가&lt;br/&gt;B = 0"] --&gt; B["85~169&lt;br/&gt;🟢→🔵&lt;br/&gt;G 감소, B 증가&lt;br/&gt;R = 0"]
+        B --&gt; C["170~255&lt;br/&gt;🔵→🔴&lt;br/&gt;B 감소, R 증가&lt;br/&gt;G = 0"]
+    end
+
+    style A fill:#ff5722,color:#fff
+    style B fill:#4caf50,color:#fff
+    style C fill:#2196f3,color:#fff</div>
+<table>
+<thead>
+<tr>
+<th>pos 값</th>
+<th>R</th>
+<th>G</th>
+<th>B</th>
+<th>결과 색상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>255</td>
+<td>0</td>
+<td>0</td>
+<td>🔴 빨강</td>
+</tr>
+<tr>
+<td>42</td>
+<td>129</td>
+<td>126</td>
+<td>0</td>
+<td>🟡 노랑 부근</td>
+</tr>
+<tr>
+<td>85</td>
+<td>0</td>
+<td>255</td>
+<td>0</td>
+<td>🟢 초록</td>
+</tr>
+<tr>
+<td>128</td>
+<td>0</td>
+<td>126</td>
+<td>129</td>
+<td>🩵 청록 부근</td>
+</tr>
+<tr>
+<td>170</td>
+<td>0</td>
+<td>0</td>
+<td>255</td>
+<td>🔵 파랑</td>
+</tr>
+<tr>
+<td>213</td>
+<td>129</td>
+<td>0</td>
+<td>126</td>
+<td>🟣 보라 부근</td>
+</tr>
+<tr>
+<td>255</td>
+<td>255</td>
+<td>0</td>
+<td>0</td>
+<td>🔴 다시 빨강</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>wheel 함수는 외울 필요 없습니다!</strong> 원리만 이해하면 됩니다: "0~255 숫자를 넣으면 무지개 색이 나오는 마법 함수". 실제로 거의 모든 NeoPixel 프로젝트에서 이 함수를 복사해서 사용합니다.</p>
+</blockquote>
+<h3 id="step-3-v1-v2">Step 3: 무지개 흐르기 (v1 → v2)<a class="headerlink" href="#step-3-v1-v2" title="Permanent link">&para;</a></h3>
+<p><strong>v1: wheel 함수만 먼저 이해하기</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># === step3_v1: wheel 함수 테스트 ===</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># 10개 LED에 무지개를 한 번 표시하는 코드</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">wheel</span><span class="p">(</span><span class="n">pos</span><span class="p">):</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;0~255 → 무지개 색상 (R,G,B) 변환&quot;&quot;&quot;</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="k">if</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">85</span><span class="p">:</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="k">return</span> <span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">elif</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">170</span><span class="p">:</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="n">pos</span> <span class="o">-=</span> <span class="mi">85</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>        <span class="n">pos</span> <span class="o">-=</span> <span class="mi">170</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="c1"># LED 10개에 무지개 배치 (정지 상태)</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>    <span class="n">color_pos</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">//</span> <span class="n">NUM_LEDS</span>  <span class="c1"># 0, 25, 51, 76, ...</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">wheel</span><span class="p">(</span><span class="n">color_pos</span><span class="p">)</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;무지개 정지 상태!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>예상 결과</strong>: LED 10개에 빨강→주황→노랑→초록→파랑→보라 순으로 무지개가 표시됩니다 (움직이지 않음).</p>
+<p><strong>v2: 애니메이션 추가 — 무지개가 흐른다!</strong></p>
+<p>v1에서 달라진 점: <code>offset</code> 변수를 증가시키면서 무지개가 <strong>이동</strong>하는 효과를 만듭니다.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># === step3_v2: 무지개 흐르기 애니메이션 ===</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># v1에서 달라진 점: offset으로 무지개가 흘러가는 효과 추가</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>  <span class="c1"># &lt;- 추가! 애니메이션 속도 조절</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">wheel</span><span class="p">(</span><span class="n">pos</span><span class="p">):</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;0~255 → 무지개 색상 (R,G,B) 변환&quot;&quot;&quot;</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="k">if</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">85</span><span class="p">:</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>        <span class="k">return</span> <span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="k">elif</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">170</span><span class="p">:</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>        <span class="n">pos</span> <span class="o">-=</span> <span class="mi">85</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        <span class="n">pos</span> <span class="o">-=</span> <span class="mi">170</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="o">-</span> <span class="n">pos</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">rainbow_flow</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;무지개가 LED 위를 흘러가는 애니메이션&quot;&quot;&quot;</span>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>    <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>       <span class="c1"># offset: 0→255로 증가</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>            <span class="c1"># 각 LED마다 위치를 다르게 계산 → 무지개 배치</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>            <span class="n">color_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">//</span> <span class="n">NUM_LEDS</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>            <span class="c1">#                                    ↑ % 256: 255 넘으면 다시 0으로!</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">wheel</span><span class="p">(</span><span class="n">color_pos</span><span class="p">)</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>  <span class="c1"># &lt;- wait 값으로 속도 조절</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="c1"># --- 무지개 3바퀴! ---</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;무지개 시작!&quot;</span><span class="p">)</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>    <span class="n">rainbow_flow</span><span class="p">(</span><span class="mf">0.03</span><span class="p">)</span>  <span class="c1"># 0.03초 간격 (빠르게!)</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="c1"># 끄기</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;끝!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>예상 출력</strong>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>무지개 시작!
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>끝!
+</span></code></pre></div></p>
+<p>(LED에서는 무지개가 3바퀴 흘러간 뒤 꺼집니다)</p>
+<p><strong>핵심 원리 분해:</strong></p>
+<table>
+<thead>
+<tr>
+<th>코드</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>offset</code></td>
+<td>0→255로 증가하면서 무지개 전체를 한 칸씩 밀어냄</td>
+</tr>
+<tr>
+<td><code>i * 256 // NUM_LEDS</code></td>
+<td>LED마다 무지개 위의 다른 위치에 배치</td>
+</tr>
+<tr>
+<td><code>+ offset</code></td>
+<td>프레임마다 위치를 이동시켜 "흐르는" 효과</td>
+</tr>
+<tr>
+<td><code>% 256</code></td>
+<td><strong>나머지 연산</strong> — 255를 넘으면 다시 0으로 돌아가 무한 순환</td>
+</tr>
+<tr>
+<td><code>time.sleep(wait)</code></td>
+<td>프레임 간격 — 작을수록 빠르게, 클수록 느리게</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🎮 <strong>속도를 바꿔보세요!</strong> <code>rainbow_flow(0.01)</code> → 매우 빠름, <code>rainbow_flow(0.1)</code> → 느긋하게</p>
+</blockquote>
+<h3 id="step-4">Step 4: 나만의 패턴 만들기 — 자유 창작 시간! 🎨<a class="headerlink" href="#step-4" title="Permanent link">&para;</a></h3>
+<p>아래 <strong>세 가지 패턴 뼈대</strong>를 제공합니다. 색상, 속도, 반복 횟수를 자유롭게 수정하여 나만의 작품을 만들어보세요!</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># === step4: 나만의 LED 패턴 만들기 ===</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># 패턴 A/B/C 중 원하는 것을 골라 수정하세요!</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># ── 패턴 A: 숨쉬기 (한 색이 천천히 밝아졌다 어두워짐) ──</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">breathe</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mf">0.03</span><span class="p">):</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;숨쉬기 효과 — r,g,b에 원하는 색 비율 입력&quot;&quot;&quot;</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="c1"># 밝아지기: 0% → 100%</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="k">for</span> <span class="n">brightness</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>        <span class="n">scale</span> <span class="o">=</span> <span class="n">brightness</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># 0.0 → 0.98</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">g</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>            <span class="c1">#        ↑ int(): 소수점 버림 (RGB는 정수만 가능!)</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>    <span class="c1"># 어두워지기: 100% → 0%</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>    <span class="k">for</span> <span class="n">brightness</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>        <span class="n">scale</span> <span class="o">=</span> <span class="n">brightness</span> <span class="o">/</span> <span class="mi">100</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">g</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="c1"># ── 패턴 B: 나이트라이더 (불빛이 좌우로 왔다갔다) ──</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="k">def</span><span class="w"> </span><span class="nf">knight_rider</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mf">0.08</span><span class="p">):</span>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;좌우 왕복 효과 — 잔상 포함&quot;&quot;&quot;</span>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>    <span class="c1"># 오른쪽으로 이동</span>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>            <span class="n">np</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>         <span class="c1"># 전체 끄기</span>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>              <span class="c1"># 메인 불빛</span>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>   <span class="c1"># 왼쪽 잔상</span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>            <span class="c1">#          ↑ r//4: 정수 나눗셈으로 밝기 1/4</span>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NUM_LEDS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>   <span class="c1"># 오른쪽 잔상</span>
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>    <span class="c1"># 왼쪽으로 이동 (되돌아옴)</span>
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>            <span class="n">np</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">NUM_LEDS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>
+</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="c1"># ── 패턴 C: 경광등 (빨강/파랑 교대) ──</span>
+</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="k">def</span><span class="w"> </span><span class="nf">police_light</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mf">0.15</span><span class="p">):</span>
+</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;경광등 효과 — 좌우 반반 깜빡임&quot;&quot;&quot;</span>
+</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>        <span class="c1"># 왼쪽 반 빨강, 오른쪽 반 파랑</span>
+</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-11-65"><a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-66"><a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-11-67"><a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a>        <span class="c1"># 색상 반전!</span>
+</span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-11-69"><a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-11-70"><a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-11-71"><a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-11-72"><a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-73"><a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-11-74"><a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a>
+</span><span id="__span-11-75"><a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a><span class="c1"># =============================================</span>
+</span><span id="__span-11-76"><a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a><span class="c1">#  🎨 아래에서 원하는 패턴을 실행하세요!</span>
+</span><span id="__span-11-77"><a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a><span class="c1">#     색상과 속도를 자유롭게 바꿔보세요.</span>
+</span><span id="__span-11-78"><a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a><span class="c1"># =============================================</span>
+</span><span id="__span-11-79"><a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a>
+</span><span id="__span-11-80"><a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a><span class="c1"># 패턴 A 실행: 하늘색 숨쉬기 (색상 바꿔보세요!)</span>
+</span><span id="__span-11-81"><a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-11-82"><a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a>    <span class="n">breathe</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-11-83"><a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a>
+</span><span id="__span-11-84"><a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a><span class="c1"># 패턴 B 실행: 빨간 나이트라이더 (색상 바꿔보세요!)</span>
+</span><span id="__span-11-85"><a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-11-86"><a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a>    <span class="n">knight_rider</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-11-87"><a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a>
+</span><span id="__span-11-88"><a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a><span class="c1"># 패턴 C 실행: 경광등 (속도 바꿔보세요!)</span>
+</span><span id="__span-11-89"><a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a><span class="n">police_light</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span><span id="__span-11-90"><a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a>
+</span><span id="__span-11-91"><a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a><span class="c1"># 전체 끄기</span>
+</span><span id="__span-11-92"><a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-11-93"><a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>    <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-11-94"><a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-11-95"><a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;나의 조명 쇼 끝!&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>각 패턴의 핵심 기법:</strong></p>
+<table>
+<thead>
+<tr>
+<th>패턴</th>
+<th>핵심 기법</th>
+<th>커스터마이징 포인트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A: 숨쉬기</td>
+<td><code>scale</code>로 밝기 비율 조절, <code>int()</code>로 정수 변환</td>
+<td>색상 <code>(r,g,b)</code>, 속도 <code>speed</code></td>
+</tr>
+<tr>
+<td>B: 나이트라이더</td>
+<td>개별 LED 인덱싱, <code>//4</code>로 잔상 효과</td>
+<td>색상, 속도, 잔상 비율(<code>//4</code> → <code>//2</code>로 바꾸면?)</td>
+</tr>
+<tr>
+<td>C: 경광등</td>
+<td>범위 분할(<code>range(5)</code>, <code>range(5,10)</code>), 색상 반전</td>
+<td>속도, 분할 위치, 색상 조합</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3">🎨 창작 미션 — 3단계 차등!<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<div class="cards-grid">
+<div class="card card-blue">
+<h3 id="_4">⭐ 기본 미션<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>패턴 A~C 중 하나를 골라 <strong>색상과 속도를 자기 취향으로 수정</strong>하세요.</p>
+<p>예: <code>breathe(255, 0, 255)</code> → 보라색 숨쉬기, <code>police_light(0.05)</code> → 고속 경광등</p>
+</div>
+<div class="card card-green">
+<h3 id="_5">⭐⭐ 도전 미션<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>패턴 <strong>2개 이상을 이어붙여</strong> 자기만의 '조명 쇼'를 구성하세요.</p>
+<p>예: 무지개 흐르기 → 빨간 나이트라이더 → 보라 숨쉬기</p>
+</div>
+<div class="card card-purple">
+<h3 id="_6">⭐⭐⭐ 고수 미션<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>새로운 패턴 함수</strong>를 직접 설계해보세요!</p>
+<p>아이디어: 양쪽에서 가운데로 모이기, 랜덤 반짝임, 파도 효과 등</p>
+</div>
+</div>
+<blockquote>
+<p>📝 <strong>작품에 이름을 붙여보세요!</strong> 실제 조명 디자이너들도 패턴에 이름을 붙입니다. "우주의 맥박", "바다의 숨결", "서울 야경" 같은 자기만의 이름이요!</p>
+</blockquote>
+<h3 id="_7">연습 문제<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>기초: 예제 변형</strong></p>
+<p>경광등 패턴의 색상을 초록/노랑으로 바꿔보세요.</p>
+<details><summary>힌트</summary>
+
+`police_light` 함수 안에서 `(255, 0, 0)`을 초록 `(0, 255, 0)`으로, `(0, 0, 255)`를 노랑 `(255, 255, 0)`으로 바꾸면 됩니다.
+
+</details>
+
+<details><summary>정답 코드</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">traffic_light</span><span class="p">(</span><span class="n">speed</span><span class="o">=</span><span class="mf">0.15</span><span class="p">):</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;초록/노랑 교대 깜빡임&quot;&quot;&quot;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>      <span class="c1"># 왼쪽: 초록</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># 오른쪽: 노랑</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># 반전</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span></code></pre></div>
+
+</details>
+
+<p><strong>응용: 새 상황</strong></p>
+<p>숨쉬기 패턴에서 LED마다 시간차를 주어 '파도' 효과를 만들어보세요. (힌트: LED 번호 <code>i</code>에 따라 <code>brightness</code> 시작점을 다르게!)</p>
+<details><summary>힌트</summary>
+
+각 LED의 밝기를 계산할 때 `(brightness + i * 10) % 100`처럼 LED 번호에 따른 오프셋을 주면 파도처럼 보입니다.
+
+</details>
+
+<details><summary>정답 코드</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">wave</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;파도 효과 — LED마다 시간차가 있는 숨쉬기&quot;&quot;&quot;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>            <span class="c1"># 각 LED에 다른 오프셋 적용</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>            <span class="n">brightness</span> <span class="o">=</span> <span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>            <span class="c1"># 삼각파: 0→50→0으로 밝기 변화</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>            <span class="k">if</span> <span class="n">brightness</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>                <span class="n">brightness</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">brightness</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>            <span class="n">scale</span> <span class="o">=</span> <span class="n">brightness</span> <span class="o">/</span> <span class="mi">50</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>            <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">g</span><span class="o">*</span><span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="c1"># 실행</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="n">wave</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>  <span class="c1"># 하늘색 파도</span>
+</span></code></pre></div>
+
+</details>
+
+<p><strong>도전: 결합/설계</strong></p>
+<p>LED가 양쪽 끝에서 가운데로 모이다가, 가운데에서 다시 양쪽으로 퍼지는 패턴 함수 <code>converge(r, g, b)</code>를 직접 설계해보세요.</p>
+<details><summary>힌트</summary>
+
+왼쪽 인덱스 `left`와 오른쪽 인덱스 `right`를 동시에 움직이세요. `left`는 0→4, `right`는 9→5로 이동하면 가운데서 만납니다.
+
+</details>
+
+<details><summary>정답 코드</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">converge</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mf">0.12</span><span class="p">):</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;양쪽에서 가운데로 모였다 퍼지는 효과&quot;&quot;&quot;</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="c1"># 모이기: 양쪽 끝 → 가운데</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>            <span class="n">np</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="n">np</span><span class="p">[</span><span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>              <span class="c1"># 왼쪽에서</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        <span class="n">np</span><span class="p">[</span><span class="n">NUM_LEDS</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 오른쪽에서</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="c1"># 퍼지기: 가운데 → 양쪽 끝</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>            <span class="n">np</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>        <span class="n">np</span><span class="p">[</span><span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>        <span class="n">np</span><span class="p">[</span><span class="n">NUM_LEDS</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="c1"># 실행</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    <span class="n">converge</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>  <span class="c1"># 보라색 수렴</span>
+</span></code></pre></div>
+
+</details>
+
+<hr />
+<h2 id="4-4050">4단계: 정리 – 작품 감상과 성찰 (40~50분)<a class="headerlink" href="#4-4050" title="Permanent link">&para;</a></h2>
+<h3 id="4045">🎭 작품 발표 시간 (40~45분)<a class="headerlink" href="#4045" title="Permanent link">&para;</a></h3>
+<p><strong>교실 조명을 끄면</strong> LED 작품의 효과가 극대화됩니다!</p>
+<p>3~4명이 나와서 자기 작품을 시연합니다:
+- <strong>작품 이름</strong>을 소개하고
+- <strong>어떤 패턴을 사용/수정했는지</strong> 간단히 설명하고
+- <strong>LED를 켭니다!</strong></p>
+<blockquote>
+<p>🔑 <strong>핵심 체험</strong>: 같은 LED Stick 10개, 같은 하드웨어인데 <strong>코드(소프트웨어)가 다르면 완전히 다른 작품</strong>이 나옵니다. 이것이 프로그래밍의 힘입니다!</p>
+</blockquote>
+<!-- IMAGE: A dark classroom scene with several students holding glowing RGB LED sticks showing different colorful patterns (rainbow, breathing blue, police lights). Students are smiling and presenting their work. Warm illustration style with emphasis on the colorful LED lights in the dark room. -->
+
+<h3 id="ux">UX 설계 사고 — 빛으로 '정보'를 전달하려면?<a class="headerlink" href="#ux" title="Permanent link">&para;</a></h3>
+<p>LED는 예쁜 조명만 만드는 게 아닙니다. <strong>사용자에게 정보를 전달하는 도구</strong>이기도 합니다.</p>
+<table>
+<thead>
+<tr>
+<th>설계 요소</th>
+<th>전달하는 의미</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>색상</strong></td>
+<td>상태/감정</td>
+<td>🟢 안전, 🟡 주의, 🔴 위험</td>
+</tr>
+<tr>
+<td><strong>밝기</strong></td>
+<td>강도/긴급도</td>
+<td>은은한 초록 = 평상시, 밝은 빨강 = 긴급</td>
+</tr>
+<tr>
+<td><strong>속도</strong></td>
+<td>긴급함/편안함</td>
+<td>느린 숨쉬기 = 안정, 빠른 깜빡임 = 경보</td>
+</tr>
+<tr>
+<td><strong>패턴</strong></td>
+<td>상황 구분</td>
+<td>고정 = 일반, 이동 = 진행 중, 깜빡임 = 주의</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 다음 시간에 만들 <strong>전자담배 검출 시스템</strong>에서 바로 이 원리가 활용됩니다! 안전=은은한 초록, 주의=숨쉬는 노랑, 경보=깜빡이는 빨강.</p>
+</blockquote>
+<h3 id="_8">핵심 정리<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="mermaid">flowchart TD
+    A["NeoPixel 제어 3단계"] --&gt; B["1️⃣ 색 넣기&lt;br/&gt;np[i] = (R, G, B)"]
+    A --&gt; C["2️⃣ 적용하기&lt;br/&gt;np.write()"]
+    A --&gt; D["3️⃣ 애니메이션&lt;br/&gt;for + time.sleep()"]
+
+    E["오늘 배운 함수들"] --&gt; F["fill(color)&lt;br/&gt;전체 같은 색"]
+    E --&gt; G["wheel(0~255)&lt;br/&gt;무지개 색상 변환"]
+    E --&gt; H["breathe()&lt;br/&gt;숨쉬기 효과"]
+    E --&gt; I["knight_rider()&lt;br/&gt;좌우 이동 효과"]
+    E --&gt; J["police_light()&lt;br/&gt;경광등 깜빡임"]
+
+    style A fill:#ff9800,color:#fff
+    style E fill:#2196f3,color:#fff</div>
+<table>
+<thead>
+<tr>
+<th>이전 시간</th>
+<th>오늘</th>
+<th>다음 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔍 센서로 읽기 (입력)</td>
+<td>💡 LED로 표현하기 (출력)</td>
+<td>🔗 센서 + LED = 검출 시스템!</td>
+</tr>
+<tr>
+<td>MQ2 → ADC → 숫자</td>
+<td>(R,G,B) → NeoPixel → 빛</td>
+<td>MQ2 값 → 판단 → LED 색상 변화</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">🔮 다음 시간 예고<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>다음 시간에는 <strong>1차시의 MQ2 센서</strong>와 <strong>오늘의 RGB LED</strong>를 결합합니다!</p>
+<ul>
+<li>MQ2 센서가 전자담배를 감지하면 → LED가 <strong>초록 → 노랑 → 빨강</strong>으로 변하는 검출 시스템</li>
+<li>오늘 배운 숨쉬기·깜빡임 패턴이 <strong>경보 애니메이션</strong>으로 활용됩니다</li>
+<li><strong>오늘 만든 코드를 잘 저장해두세요!</strong> 다음 시간에 그대로 쓸 거예요</li>
+</ul>
+<h3 id="_10">📚 교과 연결 &amp; 진로 탐색<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="cards-grid">
+<div class="card card-purple">
+<h3 id="_11">🎓 교과 연결<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>정보</strong>: 데이터 표현 (8비트 × 3채널 = 24비트 색상), 자료구조(튜플)</li>
+<li><strong>과학</strong>: 빛의 합성 (가산 혼합), 전자기파 스펙트럼</li>
+<li><strong>기술가정</strong>: 프로그래밍을 통한 제어 시스템 설계</li>
+<li><strong>수학</strong>: 나머지 연산(<code>%</code>)을 활용한 순환 구조</li>
+</ul>
+</div>
+<div class="card card-green">
+<h3 id="_12">🌟 관련 진로<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>디지털 미디어 아트</strong>: LED 인터랙티브 설치 작품</li>
+<li><strong>조명 디자인</strong>: 건축물·무대·인테리어 조명 설계</li>
+<li><strong>UX/UI 디자인</strong>: 색상·애니메이션으로 사용자 경험 설계</li>
+<li><strong>임베디드 개발</strong>: IoT 기기의 상태 표시 시스템 개발</li>
+</ul>
+</div>
+</div>
+<hr />
+<div class="assessment">
+<h3 id="_13">형성 평가<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p><strong>[개념 확인] Q1.</strong> RGB 색상 모델에서 <code>(0, 255, 255)</code>는 무슨 색인가요?</p>
+<p>① 보라 ② 노랑 ③ 청록(시안) ④ 주황</p>
+<details>
+<summary>정답 확인</summary>
+
+**정답: ③ 청록(시안)**
+
+**해설**: R=0(빨강 없음), G=255(초록 최대), B=255(파랑 최대)이므로 초록+파랑=청록(Cyan)입니다. 노랑은 (255,255,0), 보라는 (128,0,128) 또는 (255,0,255), 주황은 (255,165,0)입니다. 잘 맞혔다면 RGB 혼합을 완벽히 이해한 거예요! 👏
+
+</details>
+<p><strong>[개념 확인] Q2.</strong> NeoPixel LED 제어에서 반드시 호출해야 하는 함수는?</p>
+<p>① <code>np.show()</code> ② <code>np.update()</code> ③ <code>np.write()</code> ④ <code>np.send()</code></p>
+<details>
+<summary>정답 확인</summary>
+
+**정답: ③ np.write()**
+
+**해설**: MicroPython의 NeoPixel 라이브러리에서 `np.write()`를 호출해야 설정한 색상 데이터가 실제 LED로 전송됩니다. 이걸 빼먹으면 Pico 메모리에만 저장되고 LED는 변화 없습니다. Arduino 라이브러리에서는 `show()`를 쓰지만, MicroPython에서는 `write()`입니다.
+
+</details>
+<p><strong>[응용] Q3.</strong> 다음 코드의 빈칸을 채워 LED 0~4번을 빨강, 5~9번을 파랑으로 만드세요.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">_____</span><span class="p">,</span> <span class="n">_____</span><span class="p">,</span> <span class="n">_____</span><span class="p">)</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">_____</span><span class="p">,</span> <span class="n">_____</span><span class="p">,</span> <span class="n">_____</span><span class="p">)</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span></code></pre></div>
+<details>
+<summary>정답 확인</summary>
+
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1"># 빨강</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>   <span class="c1"># 파랑</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span></code></pre></div>
+
+**해설**: LED 인덱스 0~4는 `if i &lt; 5` 조건에 해당하여 빨강 `(255, 0, 0)`, 5~9는 `else`에 해당하여 파랑 `(0, 0, 255)`이 됩니다. 이 구조가 바로 경광등 패턴의 기본 원리입니다!
+
+</details>
+<p><strong>[응용] Q4.</strong> <code>wheel(0)</code>, <code>wheel(85)</code>, <code>wheel(170)</code>은 각각 어떤 색을 반환하나요? 순서대로 짝을 지으세요.</p>
+<table>
+<thead>
+<tr>
+<th>함수 호출</th>
+<th>보기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. wheel(0)</td>
+<td>ㄱ. 초록</td>
+</tr>
+<tr>
+<td>B. wheel(85)</td>
+<td>ㄴ. 파랑</td>
+</tr>
+<tr>
+<td>C. wheel(170)</td>
+<td>ㄷ. 빨강</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>정답 확인</summary>
+
+**A-ㄷ, B-ㄱ, C-ㄴ**
+
+- `wheel(0)` → (255, 0, 0) = 빨강
+- `wheel(85)` → (0, 255, 0) = 초록
+- `wheel(170)` → (0, 0, 255) = 파랑
+
+**해설**: wheel 함수는 0~84 구간에서 빨강→초록, 85~169 구간에서 초록→파랑, 170~255 구간에서 파랑→빨강으로 변환합니다. 각 구간의 시작점이 바로 빨강, 초록, 파랑입니다.
+
+</details>
+<p><strong>[심화/서술] Q5.</strong> 학교 복도에 설치할 비상구 안내 LED 시스템을 설계한다고 가정합니다. 평상시, 대피 시작, 긴급 상황 세 가지 상태를 <strong>색상·밝기·속도</strong> 조합으로 어떻게 표현하겠습니까? 오늘 배운 패턴을 활용하여 설명하세요.</p>
+<details>
+<summary>예시 답안</summary>
+
+**평상시**: 🟢 초록색 고정, 낮은 밝기 `(0, 30, 0)` — 눈에 거슬리지 않게 은은하게 비상구 위치만 표시
+
+**대피 시작**: 🟢 초록색 숨쉬기(breathe) 패턴, 중간 밝기, 느린 속도(speed=0.05) — "이쪽으로 이동하세요"라는 메시지를 부드럽게 전달
+
+**긴급 상황**: 🔴 빨강 빠른 깜빡임(blink), 최대 밝기 `(255, 0, 0)`, 매우 빠른 속도(speed=0.05) — 즉시 주의를 끌어 긴급 대피를 알림
+
+**설계 원리**: 안정 → 주의 유도 → 긴급 순으로 색상(초록→빨강), 밝기(낮음→높음), 속도(고정→느림→빠름)를 점진적으로 강화하여 사용자가 상황의 심각성을 직관적으로 파악할 수 있도록 합니다.
+
+</details>
+</div>
+<hr />
+<h3 id="_14">🔧 수업 자료 모음<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>설명</th>
+<th>난이도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>step1_v1_basic.py</code></td>
+<td>LED 전체 한 색으로 켜기</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>step1_v2_parade.py</code></td>
+<td>색상 퍼레이드 (fill 함수)</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>step2_individual.py</code></td>
+<td>개별 LED + 그라데이션 + 자유 실험</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>step3_rainbow.py</code></td>
+<td>무지개 흐르기 애니메이션</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>step4_my_pattern.py</code></td>
+<td>나만의 패턴 (숨쉬기/나이트라이더/경광등)</td>
+<td>★★☆</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../chapter_01/" class="md-footer__link md-footer__link--prev" aria-label="이전: 센서로 세상 읽기 – MQ2 가스 센서와 아날로그 입력 탐구">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                센서로 세상 읽기 – MQ2 가스 센서와 아날로그 입력 탐구
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter_03/" class="md-footer__link md-footer__link--next" aria-label="다음: 전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © EduFlow 2 AI 교육자료 생성 플랫폼
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.instant", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid-init.js"></script>
+      
+        <script src="../javascripts/lightbox.js"></script>
+      
+    
+  </body>
+</html>
