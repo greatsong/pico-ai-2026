@@ -1,0 +1,2589 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter_02/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트 - 2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" class="md-header__button md-logo" aria-label="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../chapter_01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  센서로 세상 읽기 – MQ2 가스 센서와 아날로그 입력 탐구
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../chapter_02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" class="md-nav__button md-logo" aria-label="2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    2026 인공지능과 피지컬 컴퓨팅 피코 프로젝트 수업
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter_01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    센서로 세상 읽기 – MQ2 가스 센서와 아날로그 입력 탐구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter_02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗺️ 전체 흐름 속 오늘의 위치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗺️ 전체 흐름 속 오늘의 위치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 핵심 개념 1: 임계값(Threshold)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 핵심 개념 2: 센서→판단→출력
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💬 사회적 맥락: 학교 전자담배 문제
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 진로 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수업 흐름 (50분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="수업 흐름 (50분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 도입 — 왜 만드는가? (5분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-v1-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (20분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-v2-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (15분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 — 캘리브레이션 + 성찰 + 확장 토의 (10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-00000500" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 도입 — 왜 만드는가? (00:00~05:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1단계: 도입 — 왜 만드는가? (00:00~05:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        학교 화장실, 보이지 않는 위험
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#halo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실제 상용 제품: HALO 센서
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 개념: 임계값(Threshold)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-1-v1-05002500" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (05:00~25:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (05:00~25:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#05000800" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        회로 연결 (05:00~08:00)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        센서→판단→출력 흐름 이해하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검출 시스템 v1: 기본 색상 전환
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        코드 해부: 무엇이 새롭고, 무엇이 복습인가?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 에러 경험 설계: 이 코드에서 뭐가 잘못됐을까?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실습 중 자주 묻는 질문
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-2-v2-25004000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (25:00~40:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (25:00~40:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v1에서 v2로: 무엇이 달라지는가?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검출 시스템 v2: 경보 애니메이션 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1-v2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v1 → v2 변경 사항 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 코드 해설: % 20의 비밀
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-40005000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 — 캘리브레이션 + 성찰 + 확장 (40:00~50:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계: 정리 — 캘리브레이션 + 성찰 + 확장 (40:00~50:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#40004500" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        임계값 캘리브레이션 (40:00~45:00)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시스템 구조 최종 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 바이브 코딩 챌린지: AI에게 기능 추가 요청하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        확장 가능성 토의
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        교과 융합 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이 시스템의 한계는?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        형성 평가
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 오늘의 핵심 정리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 오늘의 핵심 정리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        코드 파일 목록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        오늘 배운 핵심 키워드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3차시 전체 여정 돌아보기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 성찰 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음을 향해
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗺️ 전체 흐름 속 오늘의 위치
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🗺️ 전체 흐름 속 오늘의 위치">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 핵심 개념 1: 임계값(Threshold)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 핵심 개념 2: 센서→판단→출력
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💬 사회적 맥락: 학교 전자담배 문제
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 진로 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        수업 흐름 (50분)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="수업 흐름 (50분)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 도입 — 왜 만드는가? (5분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-1-v1-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (20분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-v2-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (15분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 — 캘리브레이션 + 성찰 + 확장 토의 (10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-00000500" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1단계: 도입 — 왜 만드는가? (00:00~05:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1단계: 도입 — 왜 만드는가? (00:00~05:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        학교 화장실, 보이지 않는 위험
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#halo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실제 상용 제품: HALO 센서
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 개념: 임계값(Threshold)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-1-v1-05002500" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (05:00~25:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (05:00~25:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#05000800" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        회로 연결 (05:00~08:00)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        센서→판단→출력 흐름 이해하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검출 시스템 v1: 기본 색상 전환
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        코드 해부: 무엇이 새롭고, 무엇이 복습인가?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🐛 에러 경험 설계: 이 코드에서 뭐가 잘못됐을까?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실습 중 자주 묻는 질문
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-2-v2-25004000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (25:00~40:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (25:00~40:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#v1-v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v1에서 v2로: 무엇이 달라지는가?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검출 시스템 v2: 경보 애니메이션 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v1-v2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v1 → v2 변경 사항 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 코드 해설: % 20의 비밀
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-40005000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4단계: 정리 — 캘리브레이션 + 성찰 + 확장 (40:00~50:00)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4단계: 정리 — 캘리브레이션 + 성찰 + 확장 (40:00~50:00)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#40004500" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        임계값 캘리브레이션 (40:00~45:00)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시스템 구조 최종 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎨 바이브 코딩 챌린지: AI에게 기능 추가 요청하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        확장 가능성 토의
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        교과 융합 연결
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이 시스템의 한계는?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        형성 평가
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 오늘의 핵심 정리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 오늘의 핵심 정리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        코드 파일 목록
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        오늘 배운 핵심 키워드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3차시 전체 여정 돌아보기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 성찰 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음을 향해
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">전자담배 검출 시스템 설계 – 센서→판단→출력 통합 프로젝트<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="lesson-banner">
+<p><strong>3차시(50분)</strong> | 임계값(Threshold) | 조건문(if/elif/else) | <strong>난이도</strong> ★★★☆☆</p>
+<p><strong>학습목표</strong>: 
+1. MQ2 센서와 RGB LED Stick을 하나의 시스템으로 통합하여 검출 시스템을 완성할 수 있다
+2. 임계값(threshold) 개념을 이해하고, 조건문으로 상태 판단 로직을 작성할 수 있다</p>
+<blockquote>
+<p><strong>오늘의 질문</strong>: "센서가 읽은 숫자를, 사람이 직관적으로 이해할 수 있는 '빛의 신호'로 바꾸려면 어떤 논리가 필요할까?"</p>
+</blockquote>
+</div>
+<hr />
+<h2 id="_2">🗺️ 전체 흐름 속 오늘의 위치<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>여러분은 지금 3차시 프로젝트의 <strong>대미(大尾)</strong>에 도달했습니다. 1차시에서 배운 <strong>입력</strong>(MQ2 가스 센서)과 2차시에서 배운 <strong>출력</strong>(RGB LED Stick)을 하나의 <strong>시스템</strong>으로 결합하는 시간입니다.</p>
+<div class="mermaid">flowchart LR
+    A["🔬 1차시&lt;br/&gt;센서로 세상 읽기&lt;br/&gt;(입력)"] --&gt; B["💡 2차시&lt;br/&gt;빛으로 말하기&lt;br/&gt;(출력)"]
+    B --&gt; C["🚨 3차시&lt;br/&gt;검출 시스템 설계&lt;br/&gt;(통합)"]
+
+    style A fill:#e3f2fd,stroke:#1976D2,color:#000
+    style B fill:#e8f5e9,stroke:#388E3C,color:#000
+    style C fill:#fff3e0,stroke:#F57C00,stroke-width:3px,color:#000</div>
+<blockquote>
+<p>1차시의 <code>gas_sensor.read_u16()</code> + 2차시의 <code>np[i] = (R, G, B)</code> → 오늘 <strong>하나로 합친다!</strong></p>
+</blockquote>
+<hr />
+<div class="cards-grid">
+<div class="card card-orange">
+<h3 id="1-threshold">🎯 핵심 개념 1: 임계값(Threshold)<a class="headerlink" href="#1-threshold" title="Permanent link">&para;</a></h3>
+<p>"몇 도부터 열이 나는 걸까?" — 체온계에서 37.5°C가 기준이듯, 센서 값에도 <strong>'여기부터 위험'이라는 경계선</strong>이 필요합니다. 이 경계선을 <strong>임계값</strong>이라고 합니다.</p>
+</div>
+<div class="card card-blue">
+<h3 id="2">🔧 핵심 개념 2: 센서→판단→출력<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>센서가 숫자를 읽고(입력), 조건문이 상태를 판단하고(처리), LED가 색으로 알려준다(출력). 이 <strong>3단계 구조</strong>가 모든 IoT 시스템의 뼈대입니다.</p>
+</div>
+<div class="card card-green">
+<h3 id="_3">💬 사회적 맥락: 학교 전자담배 문제<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>전자담배는 연기가 적고 냄새가 금방 사라져 적발이 어렵습니다. 하지만 <strong>가스 성분은 남아있습니다</strong>. 미국 학교에 설치된 'HALO 센서'(수백만 원)와 같은 원리를 만 원 이하 부품으로 구현해 봅시다.</p>
+</div>
+<div class="card card-purple">
+<h3 id="_4">🚀 진로 연결<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>오늘 만드는 시스템은 <strong>IoT 엔지니어</strong>, <strong>스마트시티 설계자</strong>, <strong>공중보건 데이터 분석가</strong>가 실제로 다루는 기술의 축소판입니다.</p>
+</div>
+</div>
+<hr />
+<h2 id="50">수업 흐름 (50분)<a class="headerlink" href="#50" title="Permanent link">&para;</a></h2>
+<div class="steps">
+<div class="step">
+<h4 id="1-5">1단계: 도입 — 왜 만드는가? (5분)<a class="headerlink" href="#1-5" title="Permanent link">&para;</a></h4>
+<p>사회적 맥락 연결 + 임계값 개념 도입</p>
+</div>
+<div class="step">
+<h4 id="2-1-v1-20">2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (20분)<a class="headerlink" href="#2-1-v1-20" title="Permanent link">&para;</a></h4>
+<p>MQ2 + LED Stick 동시 연결, 조건문으로 초록/노랑/빨강 전환</p>
+</div>
+<div class="step">
+<h4 id="3-2-v2-15">3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (15분)<a class="headerlink" href="#3-2-v2-15" title="Permanent link">&para;</a></h4>
+<p>깜빡임·숨쉬기 효과 추가, 사용자 심리를 고려한 시각 피드백</p>
+</div>
+<div class="step">
+<h4 id="4-10">4단계: 정리 — 캘리브레이션 + 성찰 + 확장 토의 (10분)<a class="headerlink" href="#4-10" title="Permanent link">&para;</a></h4>
+<p>임계값 튜닝, 시스템 구조 다이어그램, 바이브 코딩 챌린지, 형성 평가</p>
+</div>
+</div>
+<hr />
+<h2 id="1-00000500">1단계: 도입 — 왜 만드는가? (00:00~05:00)<a class="headerlink" href="#1-00000500" title="Permanent link">&para;</a></h2>
+<h3 id="_5">학교 화장실, 보이지 않는 위험<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>전자담배의 가장 큰 문제는 <strong>적발의 어려움</strong>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>일반 담배</th>
+<th>전자담배</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>연기</td>
+<td>많고 오래 남음</td>
+<td>적고 빨리 사라짐</td>
+</tr>
+<tr>
+<td>냄새</td>
+<td>강하고 지속</td>
+<td>약하고 금방 소멸</td>
+</tr>
+<tr>
+<td><strong>가스 성분</strong></td>
+<td><strong>남아있음</strong></td>
+<td><strong>남아있음</strong> ✅</td>
+</tr>
+</tbody>
+</table>
+<p>핵심 포인트: <strong>냄새는 사라져도, 가스 성분(글리세린, 프로필렌글리콜)은 공기 중에 남아있습니다.</strong> MQ2 센서가 바로 이 성분을 감지할 수 있습니다.</p>
+<!-- IMAGE: A clean educational infographic comparing a regular cigarette and an e-cigarette (vape). Left side shows visible smoke cloud with nose icon (strong smell). Right side shows thin vapor with a gas molecule icon labeled "chemical residue remains". Bottom shows a small MQ2 gas sensor detecting invisible molecules. Flat illustration style, pastel colors, suitable for high school students. -->
+
+<p>[그림 1] 전자담배의 연기는 사라져도 가스 성분은 남아 있다 — MQ2 센서가 이를 감지한다</p>
+<h3 id="halo">실제 상용 제품: HALO 센서<a class="headerlink" href="#halo" title="Permanent link">&para;</a></h3>
+<p>미국 학교에 설치된 <strong>HALO Smart Sensor</strong>는 공기질, 소음, 전자담배 연기를 동시에 감지합니다. 가격은 <strong>수백만 원</strong>. 오늘 우리는 같은 원리를 <strong>만 원 이하 부품</strong>으로 구현합니다.</p>
+<hr />
+<h3 id="threshold">핵심 개념: 임계값(Threshold)<a class="headerlink" href="#threshold" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>비유</strong>: 체온계의 37.5°C를 생각해 보세요. 체온이 36.5°C면 정상, 37.5°C 이상이면 "열이 있다"고 판단하죠? <strong>37.5°C가 바로 임계값</strong>입니다.</p>
+</blockquote>
+<p>우리 검출 시스템에도 이런 기준선이 <strong>두 개</strong> 필요합니다.</p>
+<div class="mermaid">flowchart LR
+    subgraph 센서값 범위
+        direction LR
+        A["0"] --- B["THRESHOLD_WARN&lt;br/&gt;(주의 기준)"] --- C["THRESHOLD_ALERT&lt;br/&gt;(경보 기준)"] --- D["65535"]
+    end
+
+    A -.- E["🟢 안전&lt;br/&gt;초록 LED"]
+    B -.- F["🟡 주의&lt;br/&gt;노랑 LED"]
+    C -.- G["🔴 경보&lt;br/&gt;빨강 LED"]
+
+    style E fill:#4caf50,color:#fff
+    style F fill:#ffeb3b,color:#000
+    style G fill:#f44336,color:#fff</div>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>센서값 범위</th>
+<th>LED 색상</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 안전</td>
+<td>0 ~ THRESHOLD_WARN 미만</td>
+<td>초록</td>
+<td>평상시, 이상 없음</td>
+</tr>
+<tr>
+<td>🟡 주의</td>
+<td>THRESHOLD_WARN ~ THRESHOLD_ALERT 미만</td>
+<td>노랑</td>
+<td>뭔가 감지됨, 주시 필요</td>
+</tr>
+<tr>
+<td>🔴 경보</td>
+<td>THRESHOLD_ALERT 이상</td>
+<td>빨강</td>
+<td>확실히 감지됨, 조치 필요</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>중요</strong>: 임계값은 <strong>환경마다 다릅니다!</strong> 교실 온도, 습도, 환기 상태에 따라 평상시 센서값이 다르기 때문입니다. "정답"은 없고, <strong>각자 자기 환경에 맞게 조정</strong>해야 합니다.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>자기점검 퀴즈 1</strong></p>
+<p><strong>Q1.</strong> 임계값(threshold)이란 무엇인가요?</p>
+<p>① 센서가 측정할 수 있는 최대값
+② 상태를 구분하는 기준이 되는 경계값
+③ LED의 최대 밝기를 결정하는 값
+④ ADC가 변환할 수 있는 비트 수</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ②</strong></p>
+<p><strong>해설</strong>: 임계값은 "여기부터 다른 상태로 전환한다"는 경계선입니다. 체온계에서 37.5°C가 '정상'과 '발열'을 나누는 기준이듯, 우리 시스템에서는 THRESHOLD_WARN과 THRESHOLD_ALERT가 '안전', '주의', '경보'를 나누는 기준입니다. 잘 맞혔다면 훌륭합니다! 👏</p>
+</details>
+<p><strong>Q2.</strong> 임계값이 환경마다 다른 이유로 <strong>가장 적절하지 않은</strong> 것은?</p>
+<p>① 교실 온도가 다르면 센서 기본값이 달라진다
+② 환기 상태에 따라 공기 중 가스 농도가 다르다
+③ MQ2 센서는 디지털 센서라서 오차가 생긴다
+④ 센서 개체별로 미세한 성능 차이가 있다</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ③</strong></p>
+<p><strong>해설</strong>: MQ2는 <strong>아날로그</strong> 센서입니다(1차시 복습!). 디지털 센서가 아니라 아날로그 신호를 ADC로 변환하는 구조이죠. 나머지 ①②④는 모두 임계값이 환경마다 달라지는 실제 이유입니다. 틀렸다면 1차시의 아날로그/디지털 개념을 복습해 보세요.</p>
+</details>
+</blockquote>
+<hr />
+<h2 id="2-1-v1-05002500">2단계: 실습 1 — 회로 연결 + 검출 시스템 v1 (05:00~25:00)<a class="headerlink" href="#2-1-v1-05002500" title="Permanent link">&para;</a></h2>
+<h3 id="05000800">회로 연결 (05:00~08:00)<a class="headerlink" href="#05000800" title="Permanent link">&para;</a></h3>
+<p>MQ2 센서와 RGB LED Stick, <strong>두 부품을 동시에</strong> 연결합니다. 1차시의 센서 + 2차시의 LED를 합치는 순간입니다!</p>
+<table>
+<thead>
+<tr>
+<th>Grove Shield 포트</th>
+<th>Pico 핀</th>
+<th>연결 부품</th>
+<th>포트 유형</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A0</strong></td>
+<td>GP26</td>
+<td>MQ2 가스 센서</td>
+<td>아날로그(ADC)</td>
+<td>가스 농도 읽기</td>
+</tr>
+<tr>
+<td><strong>D16</strong></td>
+<td>GP16</td>
+<td>RGB LED Stick</td>
+<td>디지털(NeoPixel)</td>
+<td>색상 출력</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">flowchart TB
+    subgraph SHIELD["Grove Shield (Pico 2 WH 장착)"]
+        A0["A0 포트&lt;br/&gt;아날로그 입력"]
+        D16["D16 포트&lt;br/&gt;디지털 출력"]
+    end
+
+    MQ2["🔬 MQ2 가스 센서&lt;br/&gt;공기 중 가스 감지"]
+    LED["💡 RGB LED Stick&lt;br/&gt;10개 NeoPixel LED"]
+
+    A0 --&gt;|"GP26 (ADC)"| MQ2
+    D16 --&gt;|"GP16 (Digital)"| LED
+
+    style SHIELD fill:#e8eaf6,stroke:#3f51b5,color:#000
+    style MQ2 fill:#fff3e0,stroke:#ff9800,color:#000
+    style LED fill:#e8f5e9,stroke:#4caf50,color:#000</div>
+<blockquote>
+<p>💡 <strong>꿀팁</strong>: MQ2를 먼저 A0에 꽂고 USB를 연결하세요. 센서가 예열되는 동안(1~2분) LED Stick을 D16에 연결하면 시간을 아낄 수 있습니다!</p>
+<p>⚠️ <strong>안전 주의</strong>: LED Stick의 <strong>IN</strong> 쪽이 Shield에 연결되어야 합니다. IN/OUT 표시가 작으니 잘 확인하세요. 반대로 꽂으면 LED가 켜지지 않습니다.</p>
+</blockquote>
+<hr />
+<h3 id="_6">센서→판단→출력 흐름 이해하기<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>코드를 작성하기 전에, 시스템의 <strong>논리 흐름</strong>을 먼저 이해합시다.</p>
+<div class="mermaid">flowchart TD
+    A["센서값 읽기&lt;br/&gt;read_average()"] --&gt; B{"value &gt;= THRESHOLD_ALERT?"}
+    B --&gt;|"Yes"| C["🔴 경보&lt;br/&gt;빨강 LED"]
+    B --&gt;|"No"| D{"value &gt;= THRESHOLD_WARN?"}
+    D --&gt;|"Yes"| E["🟡 주의&lt;br/&gt;노랑 LED"]
+    D --&gt;|"No"| F["🟢 안전&lt;br/&gt;초록 LED"]
+    C --&gt; G["0.5초 대기"]
+    E --&gt; G
+    F --&gt; G
+    G --&gt; A
+
+    style B fill:#ffcdd2,stroke:#c62828,color:#000
+    style D fill:#fff9c4,stroke:#f9a825,color:#000
+    style C fill:#f44336,color:#fff
+    style E fill:#ffeb3b,color:#000
+    style F fill:#4caf50,color:#fff</div>
+<p>이 흐름도에서 마름모(◇)가 바로 <strong>조건문(if/elif/else)</strong>입니다. 위에서부터 순서대로 검사하며, <strong>가장 먼저 True가 되는 조건</strong>에서 멈춥니다.</p>
+<blockquote>
+<p>🔑 <strong>왜 ALERT를 먼저 검사할까?</strong> if문은 위에서부터 순서대로 확인합니다. 만약 WARN을 먼저 검사하면, 경보 수준(예: 40000)도 WARN 조건(≥ 20000)에 걸려서 노란색으로 표시됩니다! <strong>가장 심각한 조건을 먼저 검사</strong>하는 것이 원칙입니다.</p>
+</blockquote>
+<hr />
+<h3 id="v1">검출 시스템 v1: 기본 색상 전환<a class="headerlink" href="#v1" title="Permanent link">&para;</a></h3>
+<p>이제 코드를 작성합니다. <strong>1차시의 센서 읽기 코드</strong>와 <strong>2차시의 LED 제어 코드</strong>를 합칩니다.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># === 전자담배 검출 시스템 v1 ===</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># MQ2 센서 값에 따라 LED 색상이 바뀌는 검출기</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 파일명: step1_detector_v1.py</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">ADC</span><span class="p">,</span> <span class="n">Pin</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># --- 하드웨어 설정 ---</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">gas_sensor</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">26</span><span class="p">))</span>        <span class="c1"># A0: MQ2 가스 센서  &lt;- 1차시에서 배운 부분</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span> <span class="c1"># D16: RGB LED Stick &lt;- 2차시에서 배운 부분</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1"># --- 임계값 설정 ---</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># ※ 환경에 따라 조정 필요! 아래는 시작값입니다</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">THRESHOLD_WARN</span> <span class="o">=</span> <span class="mi">20000</span>    <span class="c1"># 이 이상이면 주의 (노랑)  &lt;- 여기가 임계값!</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">THRESHOLD_ALERT</span> <span class="o">=</span> <span class="mi">35000</span>   <span class="c1"># 이 이상이면 경보 (빨강)  &lt;- 여기가 임계값!</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="c1"># --- 이동 평균 함수 (1차시 복습) ---</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_average</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;10번 읽어서 평균 → 노이즈 감소&quot;&quot;&quot;</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="k">return</span> <span class="n">total</span> <span class="o">//</span> <span class="n">count</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="c1"># --- LED 전체를 한 색으로 설정하는 함수 ---</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_all_leds</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;LED 10개를 모두 같은 색으로 설정&quot;&quot;&quot;</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>  <span class="c1"># 반드시 write()!</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="c1"># --- 메인 루프 ---</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 전자담배 검출 시스템 v1 가동 ===&quot;</span><span class="p">)</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;주의 임계값: </span><span class="si">{</span><span class="n">THRESHOLD_WARN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;경보 임계값: </span><span class="si">{</span><span class="n">THRESHOLD_ALERT</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="n">value</span> <span class="o">=</span> <span class="n">read_average</span><span class="p">(</span><span class="n">gas_sensor</span><span class="p">)</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="c1"># 조건문으로 상태 판단 (가장 심각한 것부터!)</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">THRESHOLD_ALERT</span><span class="p">:</span>       <span class="c1"># &lt;- 경보 조건을 먼저!</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>        <span class="c1"># 🔴 빨강</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🔴 경보&quot;</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">THRESHOLD_WARN</span><span class="p">:</span>      <span class="c1"># &lt;- 그 다음 주의</span>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>      <span class="c1"># 🟡 노랑</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🟡 주의&quot;</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="k">else</span><span class="p">:</span>                              <span class="c1"># &lt;- 나머지는 안전</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>        <span class="c1"># 🟢 초록</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🟢 안전&quot;</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>
+</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> | 센서값: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span></code></pre></div>
+<p>예상 출력:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>=== 전자담배 검출 시스템 v1 가동 ===
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>주의 임계값: 20000
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>경보 임계값: 35000
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>🟢 안전 | 센서값: 12450
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>🟢 안전 | 센서값: 12380
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>🟡 주의 | 센서값: 24500
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>🔴 경보 | 센서값: 38200
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>🟡 주의 | 센서값: 28100
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>🟢 안전 | 센서값: 13200
+</span></code></pre></div></p>
+<hr />
+<h3 id="_7">코드 해부: 무엇이 새롭고, 무엇이 복습인가?<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>줄 번호</th>
+<th>코드</th>
+<th>차시</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7행</td>
+<td><code>gas_sensor = ADC(Pin(26))</code></td>
+<td>1차시 복습</td>
+<td>MQ2 센서 준비</td>
+</tr>
+<tr>
+<td>9행</td>
+<td><code>np = NeoPixel(Pin(16), NUM_LEDS)</code></td>
+<td>2차시 복습</td>
+<td>LED Stick 준비</td>
+</tr>
+<tr>
+<td>12~13행</td>
+<td><code>THRESHOLD_WARN = 20000</code></td>
+<td><strong>오늘 새로 배움</strong></td>
+<td>임계값 설정</td>
+</tr>
+<tr>
+<td>28~35행</td>
+<td><code>if/elif/else</code> 블록</td>
+<td><strong>오늘 새로 배움</strong></td>
+<td>상태 판단 로직</td>
+</tr>
+<tr>
+<td>22~25행</td>
+<td><code>set_all_leds()</code></td>
+<td>2차시 복습</td>
+<td>LED 색상 변경</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>1차시 + 2차시에서 배운 코드가 <strong>그대로</strong> 활용됩니다. 새로 추가된 건 <strong>임계값 2줄</strong>과 <strong>if/elif/else 조건문</strong> 뿐입니다!</p>
+</blockquote>
+<hr />
+<h3 id="_8">🐛 에러 경험 설계: 이 코드에서 뭐가 잘못됐을까?<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>다음 코드를 보고, 실행하면 어떤 문제가 생길지 예측해 보세요.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># ❌ 잘못된 코드 — 어떤 문제가 있을까요?</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">value</span> <span class="o">=</span> <span class="n">read_average</span><span class="p">(</span><span class="n">gas_sensor</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">THRESHOLD_WARN</span><span class="p">:</span>        <span class="c1"># 주의를 먼저 검사!</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>      <span class="c1"># 노랑</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🟡 주의&quot;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">THRESHOLD_ALERT</span><span class="p">:</span>     <span class="c1"># 경보를 나중에 검사</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>        <span class="c1"># 빨강</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🔴 경보&quot;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🟢 안전&quot;</span>
+</span></code></pre></div>
+<details><summary>문제점과 해설 보기</summary>
+
+**문제**: 센서값이 40000(경보 수준)이어도 **노란색**만 나옵니다!
+
+**원인**: `if value >= THRESHOLD_WARN` (20000)을 먼저 검사하므로, 40000은 당연히 20000 이상이라 여기서 걸립니다. `elif`는 이미 위에서 True가 나왔으므로 검사하지도 않습니다.
+
+**교훈**: 조건문은 **가장 엄격한(높은) 조건부터 먼저** 검사해야 합니다!
+
+**수정**: `THRESHOLD_ALERT`를 먼저 검사하도록 if와 elif의 순서를 바꿔야 합니다(v1 코드처럼).
+
+</details>
+
+<hr />
+<h3 id="_9">실습 중 자주 묻는 질문<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>증상</th>
+<th>원인</th>
+<th>해결</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED가 처음부터 노랑/빨강</td>
+<td>평상시 값이 이미 임계값 초과</td>
+<td>Thonny 셸의 센서값 확인 → THRESHOLD 값 올리기</td>
+</tr>
+<tr>
+<td>입김 불어도 색 안 변함</td>
+<td>임계값이 너무 높음</td>
+<td>THRESHOLD_WARN을 '평상시 값 + 3000'으로 낮추기</td>
+</tr>
+<tr>
+<td>LED 안 켜짐</td>
+<td>D16 포트 미연결 / <code>np.write()</code> 누락</td>
+<td>케이블 확인 + 코드에 <code>np.write()</code> 있는지 확인</td>
+</tr>
+<tr>
+<td><code>ImportError: no module named 'neopixel'</code></td>
+<td>펌웨어 버전 문제</td>
+<td>MicroPython 최신 펌웨어로 업데이트</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>자기점검 퀴즈 2</strong></p>
+<p><strong>Q1.</strong> 다음 중 검출 시스템 v1의 <code>if/elif/else</code> 구조에 대한 설명으로 <strong>올바른</strong> 것은?</p>
+<p>① if, elif, else 조건은 동시에 모두 실행된다
+② elif는 위의 if가 False일 때만 검사된다
+③ else는 if가 True일 때 실행된다
+④ 조건의 순서는 결과에 영향을 주지 않는다</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ②</strong></p>
+<p><strong>해설</strong>: if/elif/else는 <strong>위에서부터 순서대로</strong> 검사합니다. if가 True이면 elif와 else는 건너뛰고, if가 False일 때만 elif를 검사합니다. ④가 틀린 이유는 바로 위의 에러 경험 설계에서 확인했죠? 순서가 결과를 완전히 바꿔버립니다! 맞혔다면 조건문의 핵심을 정확히 이해한 것입니다 👍</p>
+</details>
+<p><strong>Q2.</strong> (빈칸 채우기) 센서값이 42000이고, THRESHOLD_WARN=20000, THRESHOLD_ALERT=35000일 때, LED 색상은 <code>______</code>이다.</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: 빨강(경보)</strong></p>
+<p><strong>해설</strong>: 42000 ≥ 35000(THRESHOLD_ALERT)이므로 첫 번째 <code>if</code> 조건이 True가 되어 <code>set_all_leds(255, 0, 0)</code> 즉 빨간색이 켜집니다. elif와 else는 실행되지 않습니다.</p>
+</details>
+</blockquote>
+<hr />
+<h2 id="3-2-v2-25004000">3단계: 실습 2 — 검출 시스템 v2 + 경보 애니메이션 (25:00~40:00)<a class="headerlink" href="#3-2-v2-25004000" title="Permanent link">&para;</a></h2>
+<h3 id="v1-v2">v1에서 v2로: 무엇이 달라지는가?<a class="headerlink" href="#v1-v2" title="Permanent link">&para;</a></h3>
+<p>v1은 색상만 바꿔서 조금 단조롭습니다. <strong>사람의 시선을 끄는 시각 피드백</strong>을 추가해 봅시다.</p>
+<table>
+<thead>
+<tr>
+<th>상태</th>
+<th>v1 (기본)</th>
+<th>v2 (업그레이드)</th>
+<th>심리적 효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🟢 안전</td>
+<td>초록 고정 (밝음)</td>
+<td>초록 고정 (은은함)</td>
+<td>차분하고 편안함</td>
+</tr>
+<tr>
+<td>🟡 주의</td>
+<td>노랑 고정</td>
+<td>노랑 <strong>숨쉬기</strong> (밝기 변화)</td>
+<td>불안감 유발, 주시 유도</td>
+</tr>
+<tr>
+<td>🔴 경보</td>
+<td>빨강 고정</td>
+<td>빨강 <strong>깜빡임</strong></td>
+<td>긴급함 전달, 즉각 반응 유도</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>디자인 원칙</strong>: 실제 제품에서도 평상시에는 <strong>은은하게</strong>, 위험할 때만 <strong>강렬하게</strong> 표시합니다. 24시간 밝은 빛이 켜져 있으면 눈이 피로하고, 경보의 의미가 퇴색되기 때문입니다.</p>
+</blockquote>
+<!-- IMAGE: Three side-by-side LED stick illustrations showing: (1) steady dim green glow labeled "Safe - Calm", (2) pulsing yellow glow with brightness wave arrow labeled "Warning - Breathing", (3) flashing bright red with on/off alternating labeled "Alert - Blinking". Clean flat style with emotion icons (calm face, worried face, alarmed face) below each. -->
+
+<p>[그림 2] 상태별 LED 애니메이션 — 사용자 심리를 고려한 시각 피드백 설계</p>
+<hr />
+<h3 id="v2">검출 시스템 v2: 경보 애니메이션 추가<a class="headerlink" href="#v2" title="Permanent link">&para;</a></h3>
+<p>v1 코드에서 <strong>바뀐 부분</strong>에 집중하면서 읽어보세요.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># === 전자담배 검출 시스템 v2 (경보 애니메이션) ===</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># v1에서 추가: blink_red(), breathe_yellow(), 안전 밝기 조절</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 파일명: step2_detector_v2.py</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">ADC</span><span class="p">,</span> <span class="n">Pin</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">neopixel</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeoPixel</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># --- 하드웨어 설정 (v1과 동일) ---</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">gas_sensor</span> <span class="o">=</span> <span class="n">ADC</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">26</span><span class="p">))</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">NUM_LEDS</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># --- 임계값 설정 (v1과 동일) ---</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">THRESHOLD_WARN</span> <span class="o">=</span> <span class="mi">20000</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="n">THRESHOLD_ALERT</span> <span class="o">=</span> <span class="mi">35000</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># --- v1에서 가져온 함수 (동일) ---</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">read_average</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">read_u16</span><span class="p">()</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="k">return</span> <span class="n">total</span> <span class="o">//</span> <span class="n">count</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="k">def</span><span class="w"> </span><span class="nf">set_all_leds</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="c1"># ========== v2에서 새로 추가된 함수 ==========</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="k">def</span><span class="w"> </span><span class="nf">blink_red</span><span class="p">():</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;🔴 빨강 깜빡임 — 위험 상황에서 주의를 끄는 효과</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="sd">    켜고 0.15초, 끄고 0.15초 = 약 0.3초에 한 번 깜빡임&quot;&quot;&quot;</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>    <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1"># 켜기</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>    <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>     <span class="c1"># 끄기</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="k">def</span><span class="w"> </span><span class="nf">breathe_yellow</span><span class="p">(</span><span class="n">step</span><span class="p">):</span>
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;🟡 노랑 숨쉬기 — 밝기가 서서히 변하는 효과</span>
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="sd">    step: 0~19 사이 값, 호출할 때마다 1씩 증가시켜 사용</span>
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="sd">    원리: 삼각파 (0→250→0 반복)</span>
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="sd">    step 0~9:  점점 밝아짐 (0, 25, 50, ... 225, 250)</span>
+</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="sd">    step 10~19: 점점 어두워짐 (250, 225, ... 25, 0)</span>
+</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>    <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>        <span class="n">brightness</span> <span class="o">=</span> <span class="n">step</span> <span class="o">*</span> <span class="mi">25</span>          <span class="c1"># 0→250</span>
+</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>        <span class="n">brightness</span> <span class="o">=</span> <span class="p">(</span><span class="mi">19</span> <span class="o">-</span> <span class="n">step</span><span class="p">)</span> <span class="o">*</span> <span class="mi">25</span>   <span class="c1"># 250→0</span>
+</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>    <span class="n">set_all_leds</span><span class="p">(</span><span class="n">brightness</span><span class="p">,</span> <span class="n">brightness</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># R=G → 노란색 계열</span>
+</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>
+</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a><span class="c1"># ========== 메인 루프 (v1에서 업그레이드) ==========</span>
+</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 전자담배 검출 시스템 v2 ===&quot;</span><span class="p">)</span>
+</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>
+</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="n">breath_step</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 숨쉬기 애니메이션의 현재 단계</span>
+</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>
+</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>    <span class="n">value</span> <span class="o">=</span> <span class="n">read_average</span><span class="p">(</span><span class="n">gas_sensor</span><span class="p">)</span>
+</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>
+</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>    <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">THRESHOLD_ALERT</span><span class="p">:</span>
+</span><span id="__span-3-64"><a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>        <span class="n">blink_red</span><span class="p">()</span>                    <span class="c1"># &lt;- v1: set_all_leds(255,0,0) → v2: 깜빡임!</span>
+</span><span id="__span-3-65"><a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🔴 경보&quot;</span>
+</span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>
+</span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>    <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">THRESHOLD_WARN</span><span class="p">:</span>
+</span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>        <span class="n">breathe_yellow</span><span class="p">(</span><span class="n">breath_step</span><span class="p">)</span>    <span class="c1"># &lt;- v1: set_all_leds(255,255,0) → v2: 숨쉬기!</span>
+</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>        <span class="n">breath_step</span> <span class="o">=</span> <span class="p">(</span><span class="n">breath_step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">20</span>  <span class="c1"># 0~19 순환 카운터</span>
+</span><span id="__span-3-70"><a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🟡 주의&quot;</span>
+</span><span id="__span-3-71"><a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span><span id="__span-3-72"><a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>
+</span><span id="__span-3-73"><a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-3-74"><a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>        <span class="n">set_all_leds</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>         <span class="c1"># &lt;- v1: (0,255,0) → v2: (0,50,0) 은은하게!</span>
+</span><span id="__span-3-75"><a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;🟢 안전&quot;</span>
+</span><span id="__span-3-76"><a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>        <span class="n">breath_step</span> <span class="o">=</span> <span class="mi">0</span>                <span class="c1"># 숨쉬기 단계 초기화</span>
+</span><span id="__span-3-77"><a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span id="__span-3-78"><a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a>
+</span><span id="__span-3-79"><a id="__codelineno-3-79" name="__codelineno-3-79" href="#__codelineno-3-79"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> | 값: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>예상 출력 (경보 상태일 때):
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>=== 전자담배 검출 시스템 v2 ===
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>🟢 안전 | 값: 12300
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>🟢 안전 | 값: 12450
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>🟡 주의 | 값: 23800
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>🟡 주의 | 값: 25100
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>🔴 경보 | 값: 38500
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>🔴 경보 | 값: 39200
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>🟡 주의 | 값: 27600
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>🟢 안전 | 값: 13100
+</span></code></pre></div></p>
+<hr />
+<h3 id="v1-v2_1">v1 → v2 변경 사항 정리<a class="headerlink" href="#v1-v2_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>변경 위치</th>
+<th>v1 코드</th>
+<th>v2 코드</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>경보 시</td>
+<td><code>set_all_leds(255, 0, 0)</code></td>
+<td><code>blink_red()</code></td>
+<td>깜빡임으로 긴급함 전달</td>
+</tr>
+<tr>
+<td>주의 시</td>
+<td><code>set_all_leds(255, 255, 0)</code></td>
+<td><code>breathe_yellow(step)</code></td>
+<td>숨쉬기로 불안감 표현</td>
+</tr>
+<tr>
+<td>안전 시</td>
+<td><code>(0, 255, 0)</code> — 눈부심</td>
+<td><code>(0, 50, 0)</code> — 은은함</td>
+<td>24시간 켜둬도 눈 편함</td>
+</tr>
+<tr>
+<td>새 변수</td>
+<td>없음</td>
+<td><code>breath_step</code></td>
+<td>숨쉬기 단계 추적용</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="20">핵심 코드 해설: <code>% 20</code>의 비밀<a class="headerlink" href="#20" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">breath_step</span> <span class="o">=</span> <span class="p">(</span><span class="n">breath_step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">20</span>  <span class="c1"># 0~19 순환 카운터</span>
+</span></code></pre></div>
+<p>이 한 줄이 <strong>숨쉬기 효과의 핵심</strong>입니다.</p>
+<table>
+<thead>
+<tr>
+<th>breath_step 값</th>
+<th>변화</th>
+<th>밝기 (step × 25)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 → 1 → 2 → ... → 9</td>
+<td>점점 증가</td>
+<td>0 → 25 → 50 → ... → 225</td>
+</tr>
+<tr>
+<td>10 → 11 → ... → 19</td>
+<td>점점 감소</td>
+<td>250 → 225 → ... → 0</td>
+</tr>
+<tr>
+<td><strong>19 → 0</strong> (% 20으로 순환)</td>
+<td>다시 시작</td>
+<td>0 (처음으로)</td>
+</tr>
+</tbody>
+</table>
+<p><code>% 20</code>은 <strong>나머지 연산</strong>입니다. 19 다음에 <code>(19+1) % 20 = 0</code>이 되므로, 0~19 사이를 <strong>무한히 순환</strong>합니다. 마치 시계가 12 다음에 다시 1로 돌아오는 것과 같습니다.</p>
+<hr />
+<blockquote>
+<p><strong>자기점검 퀴즈 3</strong></p>
+<p><strong>Q1.</strong> v2에서 안전 상태의 LED 색상을 <code>(0, 255, 0)</code> 대신 <code>(0, 50, 0)</code>으로 바꾼 이유는?</p>
+<p>① 초록색이 아닌 다른 색을 표현하려고
+② 전력 소모를 줄이려고
+③ 평상시에는 은은하게, 경보 때만 강렬하게 하려고
+④ MicroPython에서 255를 사용하면 오류가 나서</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: ③</strong></p>
+<p><strong>해설</strong>: 24시간 밝은 빛은 눈에 피로하고, 경보와의 대비도 약해집니다. 실제 제품에서도 "평상시 은은, 위험 시 강렬" 원칙을 따릅니다. ②도 부분적으로 맞지만 주된 이유는 사용자 경험(UX) 설계입니다.</p>
+</details>
+<p><strong>Q2.</strong> (참/거짓) <code>blink_red()</code> 함수 안에 이미 <code>time.sleep(0.15)</code>가 포함되어 있으므로, 메인 루프의 경보 분기에서 별도의 <code>time.sleep()</code>이 필요 없다.</p>
+<p><details><summary>정답 확인</summary></p>
+<p><strong>정답: 참 ✅</strong></p>
+<p><strong>해설</strong>: <code>blink_red()</code> 안에 <code>sleep(0.15)</code>가 두 번(켜기+끄기) 들어있어 함수 한 번 호출에 약 0.3초가 소요됩니다. 별도의 sleep 없이도 적절한 속도로 깜빡입니다. 맞혔다면 함수의 내부 동작을 잘 추적하고 있는 것입니다! 🎉</p>
+</details>
+</blockquote>
+<hr />
+<h2 id="4-40005000">4단계: 정리 — 캘리브레이션 + 성찰 + 확장 (40:00~50:00)<a class="headerlink" href="#4-40005000" title="Permanent link">&para;</a></h2>
+<h3 id="40004500">임계값 캘리브레이션 (40:00~45:00)<a class="headerlink" href="#40004500" title="Permanent link">&para;</a></h3>
+<p>이제 <strong>여러분 환경에 맞게</strong> 임계값을 조정해 봅시다. 이것이 현실 세계 프로그래밍의 핵심입니다.</p>
+<p><strong>캘리브레이션 3단계:</strong></p>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>방법</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 기준값 측정</td>
+<td>아무것도 안 한 상태에서 30초간 셸의 센서값 관찰</td>
+<td>평상시 약 12000</td>
+</tr>
+<tr>
+<td>② 임계값 설정</td>
+<td>THRESHOLD_WARN = 기준값 + 5000</td>
+<td>12000 + 5000 = <strong>17000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>THRESHOLD_ALERT = 기준값 + 15000</td>
+<td>12000 + 15000 = <strong>27000</strong></td>
+</tr>
+<tr>
+<td>③ 테스트</td>
+<td>입김/손소독제로 3단계 전환 확인</td>
+<td>초록→노랑→빨강 잘 전환? ✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📝 <strong>나의 캘리브레이션 기록</strong>
+- 평상시 기준값: <strong><em>_</em>_
+- THRESHOLD_WARN: </strong><strong><em>_
+- THRESHOLD</em>ALERT: </strong>____</p>
+</blockquote>
+<hr />
+<h3 id="_10">시스템 구조 최종 정리<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="mermaid">flowchart LR
+    subgraph INPUT["입력 (1차시)"]
+        A["🔬 MQ2 가스 센서&lt;br/&gt;ADC 값 읽기&lt;br/&gt;read_average()"]
+    end
+
+    subgraph PROCESS["처리 (3차시 핵심)"]
+        B["⚙️ 임계값 비교&lt;br/&gt;if / elif / else&lt;br/&gt;상태 판단"]
+    end
+
+    subgraph OUTPUT["출력 (2차시)"]
+        C["💡 RGB LED Stick&lt;br/&gt;색상 + 애니메이션&lt;br/&gt;시각적 경보"]
+    end
+
+    A --&gt;|"센서값&lt;br/&gt;(0~65535)"| B
+    B --&gt;|"🟢🟡🔴&lt;br/&gt;상태 결정"| C
+
+    style INPUT fill:#e3f2fd,stroke:#1976D2,color:#000
+    style PROCESS fill:#fff3e0,stroke:#F57C00,color:#000
+    style OUTPUT fill:#e8f5e9,stroke:#388E3C,color:#000</div>
+<p>이 <strong>입력→처리→출력</strong> 3단계 구조는 스마트홈, 자율주행차, 공장 자동화 등 <strong>모든 IoT 시스템의 뼈대</strong>입니다.</p>
+<hr />
+<h3 id="ai">🎨 바이브 코딩 챌린지: AI에게 기능 추가 요청하기<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h3>
+<p>검출 시스템 v2를 더 발전시키고 싶다면? AI(ChatGPT, Claude 등)에게 <strong>프롬프트로 요청</strong>해 보세요!</p>
+<table>
+<thead>
+<tr>
+<th>추가 기능 아이디어</th>
+<th>AI에게 보낼 프롬프트 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED 게이지 바</td>
+<td>"센서값에 비례해서 LED 10개가 1개→10개씩 차오르는 게이지 바 코드를 MicroPython으로 작성해줘"</td>
+</tr>
+<tr>
+<td>자동 캘리브레이션</td>
+<td>"처음 10초간 평균값을 자동으로 측정해서 임계값을 자동 설정하는 코드를 추가해줘"</td>
+</tr>
+<tr>
+<td>경보음 추가</td>
+<td>"Pico의 PWM으로 피에조 부저를 울리는 경보음 기능을 추가해줘"</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 AI에게 요청할 때 <strong>현재 코드</strong>를 함께 첨부하면 훨씬 정확한 결과를 받을 수 있습니다!</p>
+</blockquote>
+<hr />
+<h3 id="_11">확장 가능성 토의<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>오늘 만든 건 <strong>프로토타입(시제품)</strong>입니다. 실제 제품으로 발전시키려면?</p>
+<div class="mermaid">mindmap
+  root((전자담배&lt;br/&gt;검출 시스템))
+    통신 확장
+      Wi-Fi로 교사 폰 알림
+      MQTT 서버 전송
+      클라우드 대시보드
+    센서 확장
+      SCD30 CO2 센서 추가
+      온습도 센서 추가
+      다중 센서 퓨전
+    출력 확장
+      OLED 디스플레이
+      피에조 부저 경보음
+      서보모터 환풍기 연동
+    하드웨어 확장
+      배터리 구동
+      3D 프린트 케이스
+      PCB 기판 제작</div>
+<hr />
+<h3 id="_12">교과 융합 연결<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>교과</th>
+<th>연결 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>정보</strong> (알고리즘·프로그래밍)</td>
+<td>조건문, 반복문, 함수 설계 — 수능 정보 교과 핵심</td>
+</tr>
+<tr>
+<td><strong>과학</strong> (화학)</td>
+<td>MQ2 센서의 화학물질 감지 원리 (금속산화물 반도체)</td>
+</tr>
+<tr>
+<td><strong>사회</strong> (공중보건)</td>
+<td>전자담배 규제 정책, 학교 보건 문제</td>
+</tr>
+<tr>
+<td><strong>기술·가정</strong> (제품 설계)</td>
+<td>사용자 경험(UX) 고려한 인터페이스 설계</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_13">이 시스템의 한계는?<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>어떤 기술이든 <strong>한계점</strong>을 아는 것이 중요합니다.</p>
+<table>
+<thead>
+<tr>
+<th>한계점</th>
+<th>이유</th>
+<th>개선 방안</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MQ2는 전자담배 전용이 아님</td>
+<td>알코올, 가스 등에도 반응</td>
+<td>전용 센서 + 다중 센서 조합</td>
+</tr>
+<tr>
+<td>고정 임계값의 한계</td>
+<td>온도·습도 변화 시 오차</td>
+<td>자동 캘리브레이션 알고리즘</td>
+</tr>
+<tr>
+<td>시각 경보만 존재</td>
+<td>LED를 못 보는 상황 가능</td>
+<td>소리(부저) + 원격 알림 추가</td>
+</tr>
+<tr>
+<td>오탐(False Positive) 가능</td>
+<td>손소독제, 헤어스프레이에도 반응</td>
+<td>패턴 분석 + 머신러닝</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- IMAGE: A roadmap-style illustration showing the progression from today's prototype (small breadboard with sensor and LEDs) to a finished product (sleek wall-mounted device with display and WiFi icon). Steps labeled in English: "Prototype → Add WiFi → Multi-sensor → 3D Case → Real Product". Arrows connecting each stage. Clean technical illustration style with blue and orange accents. -->
+
+<p>[그림 3] 오늘의 프로토타입에서 실제 제품까지 — 확장 로드맵</p>
+<hr />
+<div class="assessment">
+<h3 id="_14">형성 평가<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p><strong>[문항 1] 시스템 구조 이해 (기본)</strong></p>
+<p>전자담배 검출 시스템의 3단계 구조를 올바르게 나열한 것은?</p>
+<p>① 출력 → 처리 → 입력
+② 입력 → 출력 → 처리
+③ 입력 → 처리 → 출력
+④ 처리 → 입력 → 출력</p>
+<details>
+<summary>정답 확인</summary>
+
+**정답: ③**
+
+**해설**: MQ2 센서가 가스 농도를 **입력**받고, if/elif/else 조건문이 상태를 **처리**(판단)하고, RGB LED Stick이 색상으로 **출력**합니다. 이 순서는 모든 IoT 시스템의 기본 구조입니다.
+
+</details>
+<hr />
+<p><strong>[문항 2] 임계값 설정 근거 (응용)</strong></p>
+<p>학생 A의 교실에서 MQ2 센서의 평상시 값이 약 15000으로 측정되었습니다. THRESHOLD_WARN과 THRESHOLD_ALERT를 어떻게 설정하는 것이 적절한지 <strong>근거와 함께</strong> 서술하세요.</p>
+<details>
+<summary>모범 답안 확인</summary>
+
+**모범 답안**:
+
+- THRESHOLD_WARN = **20000** (기준값 15000 + 5000)
+- THRESHOLD_ALERT = **30000** (기준값 15000 + 15000)
+
+**근거**: 평상시 값(15000)에서 센서 노이즈(±2000 정도)를 고려하면, 주의 임계값은 노이즈 범위 밖인 +5000 정도가 적절합니다. 경보 임계값은 확실한 감지를 의미하므로 +15000 정도로 여유를 둡니다. 너무 낮으면 오탐(false positive)이 많아지고, 너무 높으면 실제 감지를 놓칠 수 있으므로 균형이 중요합니다.
+
+**채점 기준**: 기준값 기반 설정(2점) + 오탐/미탐 균형 언급(2점) + 구체적 수치 제시(1점)
+
+</details>
+<hr />
+<p><strong>[문항 3] 비판적 사고 + 설계 역량 (심화)</strong></p>
+<p>"이 전자담배 검출 시스템의 <strong>한계점 2가지</strong>를 지적하고, 각각에 대한 <strong>구체적인 개선 방안</strong>을 제안하시오."</p>
+<details>
+<summary>모범 답안 확인</summary>
+
+**한계점 1**: MQ2 센서가 전자담배뿐 아니라 손소독제, 헤어스프레이 등 다른 화학물질에도 반응하여 **오탐(false positive)**이 발생할 수 있다.
+
+→ **개선**: CO2 전용 센서(SCD30)를 추가하여 다중 센서 퓨전으로 정확도를 높인다. 두 센서가 동시에 반응할 때만 경보를 울리도록 AND 조건 로직을 구현한다.
+
+**한계점 2**: 고정 임계값은 시간대(점심 후 환기 부족)나 계절(겨울 창문 닫힘)에 따라 **오작동**할 수 있다.
+
+→ **개선**: 자동 캘리브레이션 기능을 추가한다. 매 5분마다 최근 평균값을 갱신하여 임계값을 동적으로 조정하는 적응형 알고리즘을 적용한다.
+
+**채점 기준**: 한계점 2가지(각 2점) + 구체적 개선 방안(각 3점) = 총 10점
+
+</details>
+<hr />
+<p><strong>[문항 4] 코드 읽기 (기본)</strong></p>
+<p>다음 코드에서 <code>breath_step = (breath_step + 1) % 20</code>의 역할을 설명하세요.</p>
+<details>
+<summary>정답 확인</summary>
+
+**정답**: breath_step 변수를 1씩 증가시키되, 20이 되면 자동으로 0으로 돌아오게 하는 **순환 카운터**입니다. % 연산자(나머지 연산)를 사용하여 0~19 범위를 무한히 반복하며, 이를 통해 숨쉬기 애니메이션의 밝기가 점점 밝아졌다(step 0~9) 점점 어두워지는(step 10~19) 효과를 만듭니다.
+
+</details>
+<hr />
+<p><strong>[문항 5] 설계 사고 (응용)</strong></p>
+<p>여러분이 이 검출 시스템을 실제 학교 화장실에 설치한다고 가정할 때, <strong>기술적 측면 외에</strong> 고려해야 할 윤리적·사회적 문제를 1가지 이상 제시하세요.</p>
+<details>
+<summary>예시 답안 확인</summary>
+
+**예시 답안들**:
+
+- **프라이버시**: 화장실은 사적 공간이므로, 센서 데이터가 개인 식별에 사용되지 않도록 해야 한다. 누가 사용 중이었는지가 아닌, 공기질 데이터만 기록해야 한다.
+- **오탐 시 피해**: 손소독제 사용 등으로 오탐이 발생했을 때, 무고한 학생이 의심받을 수 있다. 경보 데이터만으로 처벌하면 안 되고 추가 확인이 필요하다.
+- **감시 사회 우려**: 기술적 해결만 추구하면 학교가 감시 공간이 될 수 있다. 교육과 상담이 기술보다 우선되어야 한다.
+
+**핵심**: 기술은 도구일 뿐, 어떻게 사용하느냐가 더 중요합니다!
+
+</details>
+</div>
+<hr />
+<h2 id="_15">📋 오늘의 핵심 정리<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="_16">코드 파일 목록<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>파일명</th>
+<th>설명</th>
+<th>난이도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>step1_detector_v1.py</code></td>
+<td>검출 시스템 v1 — 기본 색상 전환</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>step2_detector_v2.py</code></td>
+<td>검출 시스템 v2 — 경보 애니메이션</td>
+<td>★★★</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_17">오늘 배운 핵심 키워드<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>키워드</th>
+<th>한 줄 정리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>임계값 (Threshold)</strong></td>
+<td>상태를 구분하는 경계값. 환경에 따라 조정 필요</td>
+</tr>
+<tr>
+<td><strong>if/elif/else</strong></td>
+<td>조건에 따라 다른 동작을 실행하는 분기문. 엄격한 조건부터 먼저 검사</td>
+</tr>
+<tr>
+<td><strong>입력→처리→출력</strong></td>
+<td>모든 IoT 시스템의 기본 3단계 구조</td>
+</tr>
+<tr>
+<td><strong>캘리브레이션</strong></td>
+<td>환경에 맞게 기준값을 조정하는 과정</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3">3차시 전체 여정 돌아보기<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<div class="mermaid">flowchart LR
+    W1["1차시&lt;br/&gt;🔬 센서 읽기&lt;br/&gt;ADC, 이동평균"] --&gt; W2["2차시&lt;br/&gt;💡 LED 제어&lt;br/&gt;NeoPixel, 애니메이션"]
+    W2 --&gt; W3["3차시&lt;br/&gt;🚨 시스템 통합&lt;br/&gt;임계값, 조건문"]
+    W3 --&gt; RESULT["✅ 완성!&lt;br/&gt;전자담배&lt;br/&gt;검출 시스템"]
+
+    style W1 fill:#e3f2fd,stroke:#1976D2,color:#000
+    style W2 fill:#e8f5e9,stroke:#388E3C,color:#000
+    style W3 fill:#fff3e0,stroke:#F57C00,color:#000
+    style RESULT fill:#c8e6c9,stroke:#2e7d32,stroke-width:3px,color:#000</div>
+<hr />
+<h3 id="_18">🔍 성찰 체크리스트<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>스스로 점검해 보세요:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> MQ2 센서와 RGB LED Stick을 동시에 연결하여 작동시켰다</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 임계값의 개념을 설명할 수 있다</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> if/elif/else 조건문의 실행 순서를 이해한다</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 내 환경에 맞게 임계값을 캘리브레이션했다</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 이 시스템의 한계점을 1가지 이상 말할 수 있다</li>
+</ul>
+<blockquote>
+<p><strong>3개 이상 체크했다면</strong> — 오늘의 학습목표를 달성했습니다! 🎉
+<strong>2개 이하라면</strong> — 위 교재를 다시 읽으며 해당 부분을 복습해 보세요.</p>
+</blockquote>
+<hr />
+<h3 id="_19">다음을 향해<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>오늘 완성한 검출 시스템은 <strong>시작점</strong>입니다. 여기서 Wi-Fi 알림, 다중 센서, OLED 디스플레이, 3D 프린트 케이스 등을 추가하면 <strong>실제 설치 가능한 제품</strong>으로 발전시킬 수 있습니다.</p>
+<p><strong>여러분이 만든 이 작은 프로젝트가 실제 사회 문제를 해결하는 출발점이 될 수 있다는 것, 기억하세요!</strong> 🚀</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../chapter_02/" class="md-footer__link md-footer__link--prev" aria-label="이전: 빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                빛으로 말하기 – RGB LED Stick 프로그래밍과 창작 실습
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © EduFlow 2 AI 교육자료 생성 플랫폼
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.instant", "navigation.path", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/mermaid-init.js"></script>
+      
+        <script src="../javascripts/lightbox.js"></script>
+      
+    
+  </body>
+</html>
